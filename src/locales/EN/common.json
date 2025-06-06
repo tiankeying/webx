@@ -1,0 +1,25 @@
+{
+    "message": {
+        "popup": {
+            "title": "Kind tips",
+            "content": "We regret to inform you that our services are not available for access in your region. We apologize for any inconvenience this may cause.",
+            "acknowledge": "I Acknowledge"
+        }
+    },
+    "footer": {
+        "text": "Tokenization, Trading, Investmen",
+        "investTitle": "Invest",
+        "investmentProduct": "Investment Product",
+        "earlyStageStartup": "Trading Hub",
+        "companyTitle": "Company",
+        "aboutUs": "About Us",
+        "exploreTitle": "Explore",
+        "insight": "Insight",
+        "docs": "Docs",
+        "ecosystem": "Ecosystem",
+        "termsTitle": "Terms & Conditions",
+        "termOfUse": "Term of Use",
+        "privacyPolicy": "Privacy Policy",
+        "cookiePolicy": "Cookie Policy"
+    }
+}

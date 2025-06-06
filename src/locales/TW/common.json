@@ -1,0 +1,25 @@
+{
+    "message": {
+        "popup": {
+            "title": "Kind tips",
+            "content": "We regret to inform you that our services are not available for access in your region. We apologize for any inconvenience this may cause.",
+            "acknowledge": "I Acknowledge"
+        }
+    },
+    "footer": {
+        "text": "代幣化、交易、投資",
+        "investTitle": "投資",
+        "investmentProduct": "投資產品",
+        "earlyStageStartup": "早期創業公司投資",
+        "companyTitle": "公司",
+        "aboutUs": "關於我們",
+        "exploreTitle": "探索",
+        "insight": "洞察力",
+        "docs": "文件",
+        "ecosystem": "生態系統",
+        "termsTitle": "條款及條件",
+        "termOfUse": "使用條款",
+        "privacyPolicy": "隱私權政策",
+        "cookiePolicy": "Cookie 政策"
+    }
+}

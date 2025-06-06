@@ -1,0 +1,25 @@
+{
+    "contactUsTitle": "Contact Us",
+    "contactUsDesc": "Interest in one of our products, or have a question? Feel free to reach out to us at open-vault@webx.vip, and our team will respond to you promptly.",
+    "socialMediaDesc": "You may also wish to connect with us on our social media:",
+    "form": {
+        "firstNamePlaceholder": "First Name *",
+        "firstNameError": "Please provide your first name",
+        "lastNamePlaceholder": "Last Name *",
+        "lastNameError": "Please provide your last name",
+        "emailPlaceholder": "Email *",
+        "emailError": "Please provide a valid email",
+        "organizationPlaceholder": "Organization",
+        "reasonPlaceholder": "Select a reason",
+        "reasonError": "Please select a reason",
+        "messagePlaceholder": "Message *",
+        "messageError": "Please enter your message",
+        "submitButton": "Submit",
+        "agreementText": "By submitting, you agree to receive updates, insights and news from us. This site is protected by reCAPTCHA and the Google",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service",
+        "submitSuccess": "Submission successful",
+        "submitFailed": "Submission failed. Please try again.",
+        "errorOccurred": "An error occurred. Please try again later."
+    }
+}

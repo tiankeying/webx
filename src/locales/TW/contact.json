@@ -1,0 +1,25 @@
+{
+    "contactUsTitle": "聯絡我們",
+    "contactUsDesc": "對我們的產品感興趣或有任何疑問？歡迎隨時透過 open-vault@webx.vip 與我們聯繫，我們的團隊將盡快回覆您。",
+    "socialMediaDesc": "您也可以透過以下社群平台與我們聯繫：",
+    "form": {
+        "firstNamePlaceholder": "名字 *",
+        "firstNameError": "請輸入您的名字",
+        "lastNamePlaceholder": "姓氏 *",
+        "lastNameError": "請輸入您的姓氏",
+        "emailPlaceholder": "電子郵件 *",
+        "emailError": "請輸入有效的電子郵件地址",
+        "organizationPlaceholder": "公司/機構名稱",
+        "reasonPlaceholder": "選擇聯繫原因",
+        "reasonError": "請選擇聯繫原因",
+        "messagePlaceholder": "訊息內容 *",
+        "messageError": "請輸入您的訊息",
+        "submitButton": "提交",
+        "agreementText": "提交即表示您同意接收我們的更新、洞見和新聞。本網站受到 reCAPTCHA 和 Google 的",
+        "privacyPolicy": "隱私權政策",
+        "termsOfService": "服務條款",
+        "submitSuccess": "提交成功",
+        "submitFailed": "提交失敗，請重試",
+        "errorOccurred": "發生錯誤，請稍後再試"
+    }
+}

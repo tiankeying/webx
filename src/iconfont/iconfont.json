@@ -1,0 +1,23 @@
+{
+  "id": "4899626",
+  "name": "webx",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2923655",
+      "name": "x",
+      "font_class": "x",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "34693223",
+      "name": "图片预览右边箭头",
+      "font_class": "tupianyulanyoubianjiantou",
+      "unicode": "e806",
+      "unicode_decimal": 59398
+    }
+  ]
+}

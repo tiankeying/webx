@@ -1,0 +1,130 @@
+{
+  "message": {
+      "hello": "Hello world",
+      "welcome": "Welcome to our app",
+      "buttons": {
+          "submit": "Submit",
+          "cancel": "Cancel"
+      },
+      "popup": {
+          "title": "Kind tips",
+          "content": "We regret to inform you that our services are not available for access in your region. We apologize for any inconvenience this may cause.",
+          "acknowledge": "I Acknowledge"
+      }
+  },
+  "navbar": {
+    "home": "Home",
+    "ecosystem": "Ecosystem",
+    "media": "Media",
+    "contacts": "Contacts",
+    "language": {
+      "en": "En",
+      "tw": "Tw"
+    }
+  },
+  "contactsPage": {
+    "webxEcosystemUpdates": "WebX Ecosystem Updates",
+    "coreOfCVAS": "Core of CVAS: Resonating Value Beyond Transactions",
+    "webxBusinessDescription": "WebX Business is more than just a platform — it's an innovative local lifestyle and e-commerce ecosystem serving users worldwide.",
+    "howCompaniesLeverageCVAS": "How Companies Can Leverage Consumer Value-Added Services(CVAS)for Growth and Transformation in the Context ...",
+    "cvasCommercialSuccess": "let's turn CVAS into tangible commercial success, shaping the future core competitiveness that centers on users, data, and ecosystems, connecting global users to a better quality of life while continuing to lead and co-create shared value in the ...",
+    "trillionDollarSurge": "Trillion-Dollar Surge: How Consumer Reward Programs Reshape Business and User Value",
+    "digitalEconomyEra": "The digital economy era has evolved consumption value-added services into a core business engine, driving market structure optimization and creating new growth opportunities.",
+    "webxUpdates": "WebX Updates",
+    "consumerCentricEconomy": "WebX's Consumer-Centric Economy: Where Spending Meets Next-Gen Rewards",
+    "revolutionizingDigitalPayments": "Revolutionizing Digital Payments with Borderless Transaction Architecture",
+    "buildingRWA": "Building the RWA Future: WebX's Alliance for Asset Tokenization",
+    "industryUpdates": "Industry Updates",
+    "hongKongStablecoin": "Hong Kong passes stablecoin bill, one step closer to issuance",
+    "stakingSectorOverview": "Research: Staking Sector Over-view",
+    "rwaReport": "RWA Report 2024: Rise of Real-World Assets in Crypto",
+    "hubShowcase": "Hub Showcase",
+    "baseShowroom": "Base Showroom / Video",
+    "learnMore": "Learn More",
+    "dateMay302025": "May 30, 2025",
+    "altEcosystemImage1": "Ecosystem Image 1",
+    "dateMay282025": "May 28, 2025",
+    "altEcosystemImage2": "Ecosystem Image 2",
+    "dateMay222025": "May 22, 2025",
+    "altEcosystemImage3": "Ecosystem Image 3",
+    "altWebXUpdate1": "WebX Update 1",
+    "altWebXUpdate2": "WebX Update 2",
+    "dateMay102025": "May 10, 2025",
+    "altWebXUpdate3": "WebX Update 3",
+    "dateMay052025": "May 05, 2025",
+    "altIndustry1": "Industry Update 1",
+    "bySummerZhenMay212025": "By Summer Zhen,May 21, 2025",
+    "altIndustry2": "Industry Update 2",
+    "byBrandonKaeMarch242025": "By Brandon Kae,March 24, 2025",
+    "altIndustry3": "Industry Update 3",
+    "coinGeckoMarch202024": "CoinGecko,March 20, 2024",
+    "videoNotSupported": "Your browser does not support video playback.",
+    "altPlayPauseButton": "Play/Pause Button",
+    "altWebXBtn": "WebX Button",
+    "logEcosystemPageLoaded": "Ecosystem page loaded"
+  },
+  "ecosystemPage": {
+    "webxBusiness": "WebX Business",
+    "webxBusinessDescription1": "WebX Business delivers engaging and valuable lifestyle experiences to millions of users worldwide — covering dining, travel, shopping, and entertainment.",
+    "webxBusinessDescription2": "Through an innovative loyalty program that connects consumers, promoters, and merchants, we are building a global, blockchain-powered platform for next-generation commerce.",
+    "about": "About",
+    "webxGame": "WebX Game",
+    "webxGameDescription1": "We are committed to delivering high-quality games, enhanced player experiences, and high-value GameFi opportunities. For developers and operators, we provide end-to-end publishing and operational support across the entire game lifecycle.",
+    "webxGameDescription2": "Play together. Earn together. Enjoy more.",
+    "webxCollaborator": "WebX Collaborator",
+    "webxCollaboratorDescription1": "WEBX Pay provides efficient and reliable financial solutions through innovative cross-border payment and crypto settlement services.",
+    "webxCollaboratorDescription2": "Risen Asset empowers enterprises to shatter boundaries and unlock limitless value via trustless digital links.",
+    "webxPay": "WebX Pay",
+    "webxAsset": "Risen Asset"
+  },
+  "homePage": {
+    "welcome": "Welcome",
+    "ToWebx": " to the WebX",
+    "smartEngine": "Smart Engine for New Economy",
+    "web3AlAccelerator": "Web3 & Al Business Accelerator",
+    "digitalInfrastructurePioneer": "Digital Infrastructure Pioneer",
+    "spanningEcommerce": "Spanning E-commerce, Payment, Entertainment",
+    "capitalIndustrySynergyHub": "Capital-Industry Synergy Hub",
+    "trillionDollarMarketConnector": "Trillion-Dollar Market Connector",
+    "globalPresence": "We have a ",
+    "global": "global",
+    "presence": "presence",
+    "mainlandChina": "Mainland China",
+    "hongKongChina": "Hong Kong, China",
+    "dubai": "Dubai",
+    "malaysia": "Malaysia",
+    "us": "US",
+    "europe": "Europe",
+    "webx": "WebX ",
+    "Ecosystem": "Ecosystem",
+    "weAreWebx":"We are WebX",
+    "introDesc1": "As the global economic paradigm undergoes",
+    "introDesc2": "profound transformation,",
+    "introDesc3": "WebX is positioned to lead this change."
+  },
+  "mediaPage": {
+    "contactUs": "Contact Us",
+    "businessInquiries": "For business inquiries or partnership opportunities, please reach out to us at our {email}",
+    "connectSocialMedia": "You may also wish to connect with us on our social media:",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "message": "Message",
+    "submitTip": "By submitting this form, you agree to the WebX Privacy Policy & Term of Use.",
+    "submit": "Submit"
+
+  },
+  "marketPage": {
+    "helloEcosystem": "Hello Ecosystem Page"
+  },
+  "insightPage": {
+    "helloEcosystem": "Hello Ecosystem Page"
+  },
+  "customSelect": {
+        "placeholder": "Please select a reason",
+        "generalInquiry": "General Inquiry",
+        "support": "Support",
+        "partnership": "Partnership",
+        "other": "Other"
+    }
+}
