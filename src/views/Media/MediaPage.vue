@@ -1,286 +1,697 @@
 <template>
-  <div class="media-page">
-    <div style="background: linear-gradient(180deg, rgba(242,224,172,0.5), rgba(255,255,255,0.5));">
-      <GradientRectangle />
-    </div>
+  <div>
+    <section class="section">
+     <div class="webx-ecosystem-updates">
+       <!-- <h2>{{ $t('contactsPage.webxEcosystemUpdates') }}</h2> -->
+     
+        <h2>{{ $t('contactsPage.webxEcosystemUpdates') }}</h2>
 
-    <div class="line"></div>
-    <section class="contact-section">
-      <div class="contact-inner">
-        <div class="contact-info">
-          <div class="contact-title">{{ $t('mediaPage.contactUs') }}</div>
-          <div class="desc">{{ $t('mediaPage.businessInquiries', { email: 'webx@webx.vip' }) }}</div>
-          <div class="desc-p2">{{ $t('mediaPage.connectSocialMedia') }}</div>
-          <div class="social-icons">
-            <span class="icon icon1"><img src="../../assets/icon.png" alt=""
-                style=" width: 1.6146vw;height:.9375vw"></span>
-            <span class="icon icon2"><img src="../../assets/推特.png" alt=""
-                style=" width: 1.3021vw;height:1.0938vw"></span>
-            <span class="icon icon3"><img src="../../assets/邮件,邮箱.png" alt=""
-                style=" width: 1.25vw;height:.9375vw"></span>
+    <!-- Your content here -->
+
+    <!-- Tooltip Image with Hover Effect -->
+    <div class="more-wrapper" @mouseover="showTooltip = true" @mouseleave="showTooltip = false"  @click="openWebxBusiness">
+      <img
+        :src="showTooltip ? moreBlack : more"
+        alt="more"
+        class="more-icon"
+      />
+      <div v-if="showTooltip" class="tooltip">
+        More
+        <span class="tooltip-arrow"></span>
+      </div>
+    </div>
+     </div>
+      <div class="card-container container1">
+        <div class="card1 large">
+          <div class="h3">{{ $t('contactsPage.howCompaniesLeverageCVAS') }}</div>
+          <div class="data">
+            <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
+            <div class="data-right">
+              {{ $t('contactsPage.dateJun182025') }}
+            </div>
           </div>
+          <div class="title">{{ $t('contactsPage.cvasCommercialSuccess') }}</div>
         </div>
-        <form class="contact-form">
-          <div class="row">
-            <input type="text" :placeholder="$t('mediaPage.firstName')" />
-            <input type="text" :placeholder="$t('mediaPage.lastName')" />
+        <div class="card1-img1"><img src="../../assets/index/配图2.png" alt="Ecosystem Image"
+            @click="handleImageClick(ecosystemLinks.link2)" style="cursor: pointer;" /></div>
+      </div>
+
+
+      <div class="card-container container2">
+        <div class="card1 large">
+          <div class="h3">{{ $t('contactsPage.trillionDollarSurge') }}</div>
+          <div class="data">
+            <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
+            <div class="data-right">
+              {{ $t('contactsPage.dateMay302025') }}
+            </div>
           </div>
-          <input type="email" :placeholder="$t('mediaPage.email')"
-            style="background: rgba(128,128,128,0.14);border-radius: .5208vw;" />
-          <CustomSelect class="select-wrapper" />
-          <textarea :placeholder="$t('mediaPage.message')"></textarea>
-          <div class="submit-button-container">
-            <button class="submit-button-css" type="submit">
-              {{ $t('mediaPage.submit') || 'Submit' }}
-            </button>
+          <div class="title">{{ $t('contactsPage.digitalEconomyEra') }}</div>
+        </div>
+        <div class="card1-img1"><img src="../../assets/index/配图3.png" alt="Ecosystem Image"
+            @click="handleImageClick(ecosystemLinks.link3)" style="cursor: pointer;" /></div>
+      </div>
+
+      <div class="card-container container3">
+        <div class="card1 large">
+          <div class="h3 h3-h">{{ $t('contactsPage.coreOfCVAS') }}</div>
+          <div class="data">
+            <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
+            <div class="data-right">
+              {{ $t('contactsPage.dateMay282025') }}
+            </div>
           </div>
-          <div class="form-tip">{{ $t('mediaPage.submitTip') }}</div>
-        </form>
+          <div class="title">{{ $t('contactsPage.webxBusinessDescription') }}</div>
+        </div>
+        <div class="card1-img"><img src="../../assets/index/配图1.png" alt="Ecosystem Image"
+            @click="handleImageClick(ecosystemLinks.link1)" style="cursor: pointer;" /></div>
       </div>
     </section>
-    <div style="height: 10.625vw;"></div>
+
+
+    <section class="section">
+      <h2>{{ $t('contactsPage.webxUpdates') }}</h2>
+      <div class="card2-container">
+        <div class="card2">
+          <img src="../../assets/index/插图1(1).png" alt="WebX Update 1" />
+          <div class="h3">{{ $t('contactsPage.consumerCentricEconomy') }}</div>
+          <div class="span card-p2">{{ $t('contactsPage.dateMay2225') }}</div>
+        </div>
+        <div class="card2">
+          <img src="../../assets/index/插图2(1).png" alt="WebX Update 2" />
+          <div class="h3">{{ $t('contactsPage.revolutionizingDigitalPayments') }}</div>
+          <div class="span card-p2">{{ $t('contactsPage.dateMay102025') }}</div>
+        </div>
+        <div class="card2">
+          <img src="../../assets/index/插图3(1).png" alt="WebX Update 3" />
+          <div class="h3">{{ $t('contactsPage.buildingRWA') }}</div>
+          <div class="span card-p2">{{ $t('contactsPage.dateMay052025') }}</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>{{ $t('contactsPage.industryUpdates') }}</h2>
+      <div class="card2-container">
+        <div class="card2">
+          <img src="../../assets/index/插图1(2).png" alt="Industry 1" @click="handleImageClick(imageLinks.industry1)"
+            style="cursor: pointer;" />
+          <div class="h3">{{ $t('contactsPage.hongKongStablecoin') }}</div>
+          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.bySummerZhenMay212025')
+            }}</span>
+          </div>
+        </div>
+        <div class="card2">
+          <img src="../../assets/index/插图2(2).png" alt="Industry 2" @click="handleImageClick(imageLinks.industry2)"
+            style="cursor: pointer;" />
+          <div class="h3">{{ $t('contactsPage.stakingSectorOverview') }}</div>
+          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.byBrandonKaeMarch242025')
+            }}</span>
+          </div>
+        </div>
+        <div class="card2">
+          <img src="../../assets/index/插图3(2).png" alt="Industry 3" @click="handleImageClick(imageLinks.industry3)"
+            style="cursor: pointer;" />
+          <div class="h3">{{ $t('contactsPage.rwaReport') }}</div>
+          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.coinGeckoMarch202024')
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <h2>{{ $t('contactsPage.hubShowcase') }}</h2>
+    </section>
+
+    <section class="section hub-showcase">
+      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false">
+        <source src="../../assets/index/0a0a0e804f804ba4e109f3fcb4cd34a8.mp4" type="video/mp4">
+        {{ $t('contactsPage.videoNotSupported') }}
+      </video>
+
+      <div class="video-overlay" @click="togglePlayPause">
+        <img :src="isPlaying ? playIcon : pauseIcon" alt="Play/Pause Button" class="play-pause-btn"
+          :class="{ 'clicked': isAnimating }" />
+        <!-- 可以添加一个静音按钮 -->
+        <button @click.stop="toggleMute" class="mute-btn">
+          {{ isMuted ? '🔇' : '🔊' }}
+        </button>
+      </div>
+    </section>
+
   </div>
 </template>
 <script setup>
-import GradientRectangle from '../Common/GradientRectangle.vue'
-import CustomSelect from '../Common/CustomSelect.vue'; // Import the component
-// 页面静态展示，无需逻辑
+
+import { ref, onMounted, computed } from 'vue';
+import { useI18n } from 'vue-i18n'
+import playIcon from '../../assets/index/播放.png';
+import pauseIcon from '../../assets/index/暂停.png';
+import more from '../../assets/index/更多.png';
+import moreBlack from '../../assets/index/更多黑.png';
+const { t } = useI18n()
+const videoPlayer = ref(null);
+const isPlaying = ref(false);
+const isAnimating = ref(false);
+const { locale } = useI18n()
+
+const isMuted = ref(true);
+
+const showTooltip = ref(false);
+
+// 切换静音状态的函数
+const toggleMute = () => {
+  if (videoPlayer.value) {
+    videoPlayer.value.muted = !videoPlayer.value.muted;
+    isMuted.value = videoPlayer.value.muted;
+  }
+};
+
+
+// 通用的替换逗号为换行符函数
+function formattedBySummerZhen(key) {
+  const text = t(key)
+  if (typeof text === 'string') {
+    return text.replace(',', '\n')
+  }
+  return text
+}
+
+const togglePlayPause = () => {
+  if (videoPlayer.value) {
+    if (isPlaying.value) {
+      videoPlayer.value.pause();
+    } else {
+      videoPlayer.value.play();
+    }
+    // 触发动画
+    isAnimating.value = true;
+    setTimeout(() => {
+      isAnimating.value = false;
+    }, 1000); // 动画持续1秒
+  }
+};
+
+// 图片点击跳转函数
+const handleImageClick = (url) => {
+  if (url) {
+    window.open(url, '_blank');
+  }
+};
+
+// 定义每张图片对应的跳转链接
+const imageLinks = {
+  industry1: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email', // RWA报告链接
+  industry2: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email', // 香港稳定币相关链接
+  industry3: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email', // 质押行业概览链接
+};
+
+// 添加生态系统更新部分的链接
+const ecosystemLinks = {
+  link1: 'https://medium.com/@WebXBusiness/behind-the-algorithm-how-webx-business-delivers-ai-powered-personalized-d4c1b191d5ce',
+  link2: 'https://medium.com/@WebXBusiness/ai-driven-smart-supply-chain-making-every-product-more-affordable-e82743ee71f9',
+  link3: 'https://medium.com/@WebXBusiness/webx-business-blending-multicultural-consumer-scenarios-in-a-globalized-strategy-133841819ba1'
+};
+
+const openWebxBusiness = () => {
+  window.open('https://medium.com/@WebXBusiness/', '_blank') // 新标签页打开
+  // 或者：
+  // window.location.href = 'https://b.webx.ai' // 当前页打开
+}
+
+onMounted(() => {
+  if (videoPlayer.value) {
+    videoPlayer.value.addEventListener('play', () => {
+      isPlaying.value = true;
+    });
+    videoPlayer.value.addEventListener('pause', () => {
+      isPlaying.value = false;
+    });
+    // 初始状态检查，如果视频自动播放，则设置isPlaying为true
+    if (videoPlayer.value.autoplay) {
+      isPlaying.value = true;
+    }
+  }
+});
+
+console.log('Ecosystem page loaded')
 </script>
-<style lang="sass" scoped>
-.media-page
-  background: #fff
-  font-family: Arial, sans-serif
-  .line
-    // border: .0521vw solid red
-    height: 5.2083vw
-    background: #FFFFFF
-    box-shadow: 0vw .1563vw .3646vw 0vw rgba(219,219,219,0.79)
-  .intro-section
-    background: linear-gradient(180deg, rgba(234,205,118,0.16), rgba(255,255,255,0.16));
-    
-    .intro-inner
-      margin: 0 auto
-      display: flex
-      align-items: center
-      // position: relative
-      .arrow-left
-        margin-left: 16.1458vw
-        width: 4.1667vw
-        height: 4.1667vw
-      .arrow-right
-        margin-right: 16.1458vw
-      .intro-content
-        flex: 1
-        text-align: center
-        
-        height: 56.25vw
-        margin-bottom: 3.6979vw
-        padding-top: 5.2083vw
-        .intro-text
-          background: url('@/assets/index/插图.png') no-repeat center/contain
-          margin-top: 6.25vw
-          border: .0521vw solid red
-          height: 44.7917vw
-          width: 56.6146vw
-          margin-left: auto
-          margin-right: auto
-        .title
-          display: flex
-          align-items: center
-          justify-content: center
-          height: 4.6875vw
-          font-family: Source Han Sans SC
-          font-weight: 800
-          font-size: 4.6875vw
-          color: #000000
-          text-align: center
-          margin-top: 3.9063vw
-          
-        .intro-desc
-          width: 30.1563vw
-          margin-top: 6.875vw
-          margin-left: auto
-          margin-right: auto
-          font-family: Source Han Sans SC
-          font-weight: 400
-          font-size: 1.4583vw
-          color: rgba(0, 0, 0, 0.7)
-          line-height: 2.6042vw
-        // .intro-visual
-        //   width: 56.6146vw
-        //   height: 44.7917vw
-        //   margin: 0 auto
-        //   border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%
-         
-  .contact-section
-    // background: #fafafa
-    // padding: 2.9167vw 0 4.1667vw
-    .contact-inner
-      display: flex
-      justify-content: center
-      gap: 6.9792vw
-      margin-top: 4.2708vw
-      // align-items: center
-      // justify-content: space-between
-      // align-items: flex-start
-    .contact-info
-      width: 25.1042vw
-      .contact-title
-        line-height: 2.6042vw
-        font-family: Alibaba PuHuiTi
-        font-weight: bold
-        font-size: 2.6042vw
-        color: #000000
-        margin-bottom: 3.6458vw
-      .desc
-        font-family: Source Han Sans SC
-        font-weight: 400
-        font-size: 1.3542vw
-        color: #808080
-        line-height: 2.2917vw
-      .desc-p2 
-          font-family: Source Han Sans SC
-          font-weight: 400
-          font-size: 1.3542vw
-          color: #808080
-          line-height: 2.2917vw  
-          margin-top: 3.2813vw
-          margin-bottom: 2.5vw
-      .social-icons
-        font-size: 1.1458vw
-        margin-top: .5208vw
-         
-        .icon2
-          margin: 0 2.6042vw
-    .contact-form
-      width: 37.3958vw
-      display: flex
-      flex-direction: column
-      
-      .row
-        display: flex
-        gap: 1.3021vw
-        padding: .5208vw .625vw
-        
-        input
-          flex: 1
-          height: 2.9688vw
-          background: rgba(128,128,128,0.14)
-          border-radius: .5208vw
-      
-      input, select, textarea
-        margin-bottom: 1.6667vw
-        padding: .5208vw .625vw
-        border: .0521vw solid #ddd
-        border-radius: .2083vw
-        font-size: 1.3542vw
-        background: #fff
-      input::placeholder, textarea::placeholder
-        color: #000
-        font-size: 1.3542vw
-        font-family: Source Han Sans SC  
-      .select-wrapper
-        position: relative
-        width: 100%  // 改为100%与父容器宽度一致
-        margin-bottom: 1.6667vw      
-      .contact-select
-        width: 100%  // 改为100%而不是104%
-        background: rgba(128,128,128,0.14)
-        border-radius: .5208vw
-        border: .0521vw solid #ddd
-        outline: none
-        appearance: none 
-        -webkit-appearance: none
-        -moz-appearance: none
-        background-image: url('../../assets/index/箭头下.png')
-        background-repeat: no-repeat
-        background-position: right 1.5104vw center 
-        background-size: 1.0938vw .7292vw
-        option:hover
-          background-color: #000
-          color: #000               
-      textarea
-        height: 5vw
-        background: rgba(128,128,128,0.14)
-        border-radius: .5208vw
-        margin-bottom: 7.3958vw
-      
-      // 添加呼吸动画效果
-      .submit-button-container
-        cursor: pointer
-        display: inline-block
-        
-        &:hover .submit-button-css
-          animation: breathe 0.6s ease-out
-          transform: scale(1.05)
-          
-      .submit-button-css
-        width: 9.5833vw
-        height: 3.3854vw
-        background: #000000
-        border: none
-        border-radius: 0.5208vw
-        color: #F2C755
-        font-family: Source Han Sans SC
-        font-weight: bold
-        font-size: 1.25vw
-        cursor: pointer
-        box-shadow: 0 0.2083vw 0.4167vw rgba(0, 0, 0, 0.2)
-        transition: all 0.3s ease
-        position: relative
-        overflow: hidden
-        
-        &::before
-          content: ''
-          position: absolute
-          top: 0
-          left: -100%
-          width: 100%
-          height: 100%
-          background: linear-gradient(90deg, transparent, rgba(242, 199, 85, 0.3), transparent)
-          transition: left 0.5s ease
-          
-        &:hover::before
-          left: 100%
-          
-        &:hover
-          box-shadow: 0 0.3125vw 0.625vw rgba(0, 0, 0, 0.3)
-          background: #1a1a1a
-          
-        &:active
-          transform: translateY(0.0521vw)
-          box-shadow: 0 0.1042vw 0.2083vw rgba(0, 0, 0, 0.2)
-          
-      // 定义呼吸动画关键帧
-      @keyframes breathe
-        0%
-          transform: scale(1)
-        30%
-          transform: scale(1.1)
-        100%
-          transform: scale(1)  
-      
-      .submit-btn
-        background: #000
-        color: #ffe9a7
-        font-weight: bold
-        border: none
-        border-radius: .3125vw
-        padding: .5208vw 0
-        font-size: .9375vw
-        margin-top: .4167vw
-        cursor: pointer
-        width: 7.2917vw
-        align-self: flex-start
-        box-shadow: 0 .1042vw .2083vw #eee
-      .form-tip
-        margin-top: 1.1458vw
-        font-family: Source Han Sans SC
-        font-weight: 400
-        font-size: .9375vw
-        color: #000000
-        line-height: 2.2917vw
+
+<style lang="scss" scoped>
+.section,
+.section1 {
+  width: 1350px;
+  margin: auto;
+}
+
+.section:first-of-type {
+  margin-top: 177px;
+  max-width: 1420px;
+  // border: .0521vw solid #000000;
+  margin-bottom: 170px;
+  // border: 1px solid red;
+}
+
+.section:first-of-type .card1 .h3 {
+  // width: 726px;
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  font-size: 24px;
+  color: #000000;
+  // line-height: 34px;
+  word-break: normal;
+  white-space: normal;
+  overflow-wrap: break-word;
+  margin-bottom: 31px;
+  text-align: justify;
+  /* 均匀对齐文本边缘 */
+  
+}
+
+/* 第一个 .h3 的特定样式 */
+.card-container.container1 .card1 .h3 {
+  width: 726px;
+  // height: 60px;
+}
+
+/* 第二个 .h3 的特定样式 */
+.card-container.container2 .card1 .h3 {
+  width: 646px;
+  // height: 59px;
+}
+
+/* 第三个 .h3 的特定样式 */
+.card-container.container3 .card1 .h3 {
+  width: 726px;
+  // height: 59px;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+}
+
+.data-left {
+  width: 179.3px;
+  height: 49px;
+  // padding: 10px;
+  background: #F2F2F2;
+  opacity: 1;
+  font-family: Source Han Sans SC;
+  font-weight: 400;
+  font-size: 18px;
+  color: #8E8E8E;
+  text-align: center;
+  line-height: 49px;
+}
+
+.data-right {
+  margin-left: 37px;
+  height: 18px;
+  font-family: Source Han Sans SC;
+  font-weight: 400;
+  font-size: 18px;
+  color: #808080;
+  line-height: 24px;
+}
+
+.title {
+  // width: 696px;
+  font-family: Source Han Sans SC;
+  font-weight: 400;
+  font-size: 18px;
+  color: #808080;
+  line-height: 24px;
+  text-align: justify;
+  /* 均匀对齐文本边缘 */
+}
+
+/* 第一个 .h3 的特定样式 */
+.card-container.container1 .card1 .title {
+  width: 694px;
+  height: 71px;
+  margin-top: 32px;
+}
+
+/* 第二个 .h3 的特定样式 */
+.card-container.container2 .card1 .title {
+  width: 721px;
+  height: 71px;
+  margin-top: 31px;
+  overflow-wrap: break-word;
+  white-space: normal;
+  word-break: normal;
+}
+
+/* 第三个 .h3 的特定样式 */
+.card-container.container3 .card1 .title {
+  width: 708px;
+  height: 47px;
+  margin-top: 32px;
+  white-space: pre-wrap; 
+  // border: 1px solid red;
+}
 
 
-      
+.card1,
+.card2 {
+  // padding: 15.9994px;
+  flex: 1 1 30%;
+  box-sizing: border-box;
+  background: #fff;
+  
+}
+
+.card1-img img,.card1-img1 img {
+  cursor: pointer;
+  width: 505px;
+  height: 243px;
+  transition: transform 0.3s ease;
+  border-radius: 20px;
+}
+
+
+.card1-img img:hover,
+.card1-img1 img:hover {
+  transform: translateY(-10px);
+}
+
+.card2-container img {
+  cursor: pointer;
+  width: 419px;
+  height: 210px;
+  transition: transform 0.3s ease;
+  border-radius: 20px;
+}
+
+.card2-container img:hover {
+  transform: translateY(-10px);
+}
+
+.card2-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 21px;
+  margin-bottom: 170px
+}
+
+.card2-container img {
+  width: 419px;
+  height: 210px;
+}
+
+.card2-container .h3 {
+  margin-top: 34px;
+  width: 416px;
+  border:1px solid transparent;
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  font-size: 24px;
+  color: #000000;
+  line-height: 34px;
+  min-height: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 大致控制在 3 行内，根据 line-height 来决定 */
+  -webkit-box-orient: vertical;
+}
+
+.card2-container .span {
+  font-family: Source Han Sans SC;
+  font-weight: 400;
+  font-size: 18px;
+  color: #808080;
+  
+}
+
+.card2-container .card-p2 {
+  margin-top: 37px;
+}
+
+.card2-container .card-p3 {
+  margin-top: 24px;
+}
+.author-text-en{
+line-height: 14px;
+transform: translateY(10px);
+border: 1px solid transparent;
+}
+.author-text-cn{ 
+  line-height: 24px;
+}
+
+.section h2 {
+  margin-bottom: 56px;
+  font-family: Alibaba PuHuiTi;
+  font-weight: bold;
+  font-size: 50px;
+  color: #000000;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.container1 {
+  margin-bottom: 79px;
+}
+
+.container2 {
+  margin-bottom: 87px;
+}
+
+.card-container h3 {
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  font-size: 24px;
+  color: #000000;
+  line-height: 34px;
+}
+
+.large {
+  // width: 726px;
+  // flex: 1;
+  // border: 1px solid red;
+}
+
+.hub-showcase {
+  position: relative; // 使 overlay 能够相对于视频定位
+  width: 1300px;
+  height: 749px;
+  // margin:auto;
+  left: -20px;
+  margin-bottom: 176px;
+  // border: 1px solid red;
+}
+
+.hub-showcase video {
+  width: 1300px;
+  height: 749px;
+  cursor: pointer;
+  display: block; // 移除视频底部的空白间隙
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  /* 默认隐藏 */
+  transition: opacity 0.3s ease;
+  /* 添加淡入淡出过渡效果 */
+}
+
+/* 当鼠标悬停在hub-showcase区域时显示播放控制 */
+.hub-showcase:hover .video-overlay {
+  opacity: 1;
+}
+
+.play-pause-btn {
+  width: 96px;
+  height: 96px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.play-pause-btn.clicked {
+  animation: playPauseClickEffect 1s ease-out forwards;
+}
+
+@keyframes playPauseClickEffect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 确保静音按钮始终可见 */
+.mute-btn {
+  position: absolute;
+  top: 28.8px;
+  right: 28.8px;
+  width: 57.6px;
+  height: 57.6px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(84, 120, 141, 0.8), rgba(84, 120, 141, 0.6));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
+    0 2.0006px 8.0006px rgba(0, 0, 0, 0.1),
+    inset 0 1.0003px 0 rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  color: #333;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  opacity: 1;
+  /* 静音按钮始终可见 */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section1 p {
+  margin: 0;
+  margin-top: 23px;
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  font-size: 24px;
+  color: #000000;
+  line-height: 34px;
+}
+
+.btn {
+  margin-bottom: 176px;
+  margin-top: 63px;
+  padding: 0;
+}
+
+.section1 img {
+  width: 1303.0003px;
+  height: 84px;
+  /* animation: breathe 2s ease-in-out infinite; */
+  /* Remove this line */
+
+}
+
+/* 瞬间放大还原动画 */
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.section1 img:hover {
+  /* transform: translateY(-0.5208vw); */
+  /* This might conflict or be overridden by the animation. If you want both, you might need to adjust the animation or apply transform differently. */
+  animation: bounce 0.6s ease-out;
+  /* Add this line */
+}
+
+.rounded-video {
+  border-radius: 24px;
+  /* 或 50% 变成圆形，或你想要的值 */
+  overflow: hidden;
+  /* 保证圆角不被内容撑破 */
+  display: block;
+  /* 避免 video 默认的内联行为造成间隙 */
+  aspect-ratio: 1 / 1;
+  /* 强制为正方形（现代浏览器支持） */
+  object-fit: cover;
+  /* 防止视频拉伸 */
+}
+
+.h3-h {
+  height: 67.72px;
+}
+.webx-ecosystem-updates {
+  // position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.webx-ecosystem-updates h2{
+  width: 630px;
+// height: 48px;
+margin-bottom: 90px;
+border: 1px solid transparent;
+font-family: Alibaba PuHuiTi;
+font-weight: bold;
+font-size: 50px;
+color: #000000;
+}
+
+.more-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 10px;
+  // margin-right: 10px
+}
+.more-wrapper img{
+  width: 52px;
+  height: 12px;
+}
+
+.tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(-8px);
+  background-color: #000;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 18px;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  opacity: 0.95;
+  pointer-events: none;
+}
+.tooltip-arrow {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #000;
+  content: '';
+}
+
 </style>

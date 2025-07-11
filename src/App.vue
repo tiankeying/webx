@@ -1,34 +1,44 @@
 <template>
   <div id="app">
-    <AppNavbar />
-    <!-- 恢复根路径的动态组件渲染 -->
-    <template v-if="['/'].includes(route.path)">
+    <!-- 移动端顶部导航栏 -->
+    <Navbar v-if="isMobile" />
+    <AppNavbar v-else />
+
+
+    <!-- 扩展动态组件渲染到所有有移动端版本的路径 -->
+    <template v-if="['/', '/Ecosystem', '/Media', '/Contacts'].includes(route.path)">
       <transition :name="animationName">
-        <component 
-          :is="getComponent()"
-          :key="getComponentKey()"
-        />
+        <component :is="getComponent()" :key="getComponentKey()" />
       </transition>
     </template>
     <!-- 其他路由使用 router-view -->
     <template v-else>
       <router-view />
     </template>
-    <AppFooter />
+
+
+    <!-- 移动端底部导航栏 -->
+    <Footer v-if="isMobile"></Footer>
+    <AppFooter v-else />
   </div>
 </template>
 
 <script setup>
 import AppNavbar from './components/AppNavbar.vue';
 import AppFooter from './components/AppFooter.vue';
-import { shallowRef, computed, onMounted, watch } from 'vue';  // 新增 shallowRef 导入
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'; 
+import Navbar from "./components/m-Navbar.vue";
+import Footer from "./components/m-Footer.vue";
+
+import { shallowRef, computed, onMounted, watch } from 'vue';
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'; 
 import { useI18n } from 'vue-i18n';
-import { defineAsyncComponent,ref } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
+
 const { t } = useI18n();
+const route = useRoute();
+const router = useRouter(); // 添加router
 const animationName = ref('defaultAnimation');
 const showModal = ref(true);
-const route = useRoute(); 
 
 // 移动端检测
 const checkIsMobile = () => {
@@ -36,46 +46,112 @@ const checkIsMobile = () => {
          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 
-// 修改为 shallowRef（关键修复点）
-const homeComponent = shallowRef(null);
+const currentComponent = shallowRef(null);
 const isMobile = ref(checkIsMobile());
-const homeComponentKey = ref(Date.now());
+const componentKey = ref(Date.now());
 
-// 恢复动态组件更新逻辑
-const updateComponents = () => {
-  isMobile.value = checkIsMobile(); 
-  if (isMobile.value && route.path === '/') {
-    // 移动端访问首页，重定向到 /unsupported 或其他页面
-    alert('该页面仅支持在PC端访问');
-    homeComponent.value = defineAsyncComponent(() =>
-      import('./views/Unsupported.vue')
-    );
-    homeComponentKey.value = Date.now();
-    return;
-  }
-  homeComponent.value = defineAsyncComponent(() => import('./views/Home/HomePage.vue'));
-  homeComponentKey.value = Date.now();
+console.log('isMobile:', isMobile.value);
+
+// 路由映射函数
+const getDesktopPath = (mobilePath) => {
+  const pathMap = {
+    '/mobile': '/',
+    '/Ecosystem/mobile': '/Ecosystem',
+    '/Media/mobile': '/Media',
+    '/Contacts/mobile': '/Contacts'
+  };
+  return pathMap[mobilePath] || '/';
 };
 
-const getComponent = () => {
-  if (route.path === '/') {
-    return homeComponent.value; 
+const getMobilePath = (desktopPath) => {
+  const pathMap = {
+    '/': '/mobile',
+    '/Ecosystem': '/Ecosystem/mobile',
+    '/Media': '/Media/mobile',
+    '/Contacts': '/Contacts/mobile'
+  };
+  return pathMap[desktopPath] || '/mobile';
+};
+
+// 修改后的 updateComponents 函数
+const updateComponents = () => {
+  const path = route.path;
+  console.log('当前路径:', path, '移动端状态:', isMobile.value);
+  
+  if (isMobile.value) {
+    // 移动端组件映射
+    switch (path) {
+      case '/':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Home/HomeMobile.vue'));
+        break;
+      case '/Ecosystem':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Ecosystem/EcosystemMobile.vue'));
+        break;
+      case '/Media':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Media/MediaMobile.vue'));
+        break;
+      case '/Contacts':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Contacts/ContactsMobile.vue'));
+        break;
+      default:
+        currentComponent.value = null;
+    }
+  } else {
+    // 桌面端组件映射
+    switch (path) {
+      case '/':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Home/HomePage.vue'));
+        break;
+      case '/Ecosystem':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Ecosystem/EcosystemPage.vue'));
+        break;
+      case '/Media':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Media/MediaPage.vue'));
+        break;
+      case '/Contacts':
+        currentComponent.value = defineAsyncComponent(() => import('./views/Contacts/ContactsPage.vue'));
+        break;
+      default:
+        currentComponent.value = null;
+    }
   }
+
+  componentKey.value = Date.now();
+};
+
+// 监听移动端状态变化
+watch(isMobile, (newValue, oldValue) => {
+  console.log('isMobile值发生变化:', {
+    oldValue,
+    newValue,
+    currentPath: route.path,
+    timestamp: new Date().toLocaleString()
+  });
+
+  // 立即更新组件
+  updateComponents();
+}, { immediate: true });
+
+const getComponent = () => {
+  return currentComponent.value;
 };
 
 const getComponentKey = () => {
-  if (route.path === '/') {
-    return homeComponentKey.value;
-  }
+  return componentKey.value;
 };
 
 onMounted(() => {
   updateComponents();
-  
+
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(updateComponents, 200);
+    resizeTimer = setTimeout(() => {
+      const newIsMobile = checkIsMobile();
+      if (newIsMobile !== isMobile.value) {
+        isMobile.value = newIsMobile;
+      }
+    }, 100); // 减少延迟从200ms到100ms
   });
 });
 
@@ -84,11 +160,28 @@ watch(route, () => {
 });
 </script>
 
-<style>
-
-#app {
-  max-width: 1920px;
+<style lang="scss" scoped>
+/* 在style标签中添加 */
+*{
+  box-sizing: border-box;
 }
+
+body,
+html{
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+/* #app {
+  max-width: 1920px;
+} */
+ #app {
+   max-width: 100vw; // 改为视口宽度
+   overflow-x: hidden; // 防止横向滚动
+   box-sizing: border-box;
+  display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+ }
 .van-overlay {
   z-index: 9998 !important;
 }
@@ -106,11 +199,11 @@ watch(route, () => {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 0 1.0417vw 0vw;
+  padding: 0 20.0006px 0px;
 }
 
 /* 非移动端媒体查询 */
-@media (min-width: 39.0625vw ) {
+@media (min-width: 750px ) {
   .modal-body {
     height: 30vh;
   }
@@ -125,7 +218,7 @@ watch(route, () => {
 }
 
 /* 移动端样式 */
-@media (max-width: 39.0625vw) {
+@media (max-width: 750px) {
   .H5Molde {
     display: block;
   }
@@ -140,16 +233,16 @@ watch(route, () => {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 0 1.0417vw 0vw;
+  padding: 0 20.0006px 0px;
   /* 可根据需要调整内边距 */
 }
 
-/* 添加样式让 #app 至少占满整个视口高度 */
-#app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+// /* 添加样式让 #app 至少占满整个视口高度 */
+// #app {
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+// }
 
 /* 让 router-view 部分填充剩余空间 */
 router-view {
@@ -179,14 +272,14 @@ router-view {
 }
 
 .modal.fade .modal-content {
-  border-radius: 0 0 0.5rem 0.5rem;
+  border-radius: 0 0 8px 8px;
   border-top: none;
 }
 
 /* 确保模态框在移动设备上也能正确显示 */
-@media (max-width: 29.999vw) {
+@media (max-width: 575.9808px) {
   .modal-fullscreen-sm-down .modal-content {
-    height: 5.2083vw;
+    height: 99.9994px;
     /* min-height: auto; */
   }
 }

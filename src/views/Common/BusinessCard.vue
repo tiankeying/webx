@@ -36,10 +36,10 @@ const props = defineProps({
   floatingIcons: { type: Array, required: true },
   // 按钮文本
   buttonText: { type: String, required: true },
-  // 容器尺寸（格式：{ width: '27.1354vw', height: '29.0625vw' }）
+  // 容器尺寸（格式：{ width: '520.9997px', height: '558px' }）
   size: {
     type: Object,
-    default: () => ({ width: '27.1354vw', height: '29.0625vw' })
+    default: () => ({ width: '520.9997px', height: '558px' })
   },
   // 是否显示按钮
   showButton: {
@@ -77,13 +77,15 @@ const handleArrowError = (e) => {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
-  min-height: 33.8542vw;
+  max-height: 650.0006px;
+  min-height: 650.0006px;
+  max-width: 512px;
 
   .business-container {
     width: 100%;
-    // max-width: 31.25vw;
-    margin: 1.0417vw auto 0;
+    min-width: 512px;
+    max-width: 512px;
+    // margin: 20.0006px auto 0;
     flex: 1;
     display: flex;
     align-items: center;
@@ -93,6 +95,7 @@ const handleArrowError = (e) => {
     position: relative;
     display: inline-block;
     width: 100%;
+    border: 1px solid transparent;
   }
 
   .main-image {
@@ -104,7 +107,7 @@ const handleArrowError = (e) => {
 
   .floating-icon {
     position: absolute;
-    width: 25%;
+    max-width: 508px;
     height: auto;
     animation: float 3s ease-in-out infinite;
     z-index: 2;
@@ -112,52 +115,58 @@ const handleArrowError = (e) => {
 
   // 添加缺失的浮动图标定位类
   .car {
-    top: 11.9271vw;
-    left: -2.0313vw;
+    top: 229.0003px;
+    left: -39.001px;
     animation-delay: 0s;
-    width: 8.1771vw !important;
-    height: 4.3229vw !important;
+    max-width: 157.0003px !important;
+    max-height: 82.9997px !important;
+    min-width: 157.0003px !important;
+    min-height: 82.9997px !important;
   }
 
   .dress {
-    top: 5.625vw;
-    left: 3.5938vw;
+    top: 108px;
+    left: 69.001px;
     animation-delay: 0.6s;
-    width: 6.4583vw !important;
-    height: 6.6667vw !important;
+    max-width: 124px !important;
+    max-height: 128.0006px !important;
+    min-width: 124px !important;
+    min-height: 128.0006px !important;
   }
 
   .cart {
-    top: 9.2188vw;
-    right: -1.5104vw;
+    top: 177.001px;
+    right: -28.9997px;
     animation-delay: 0.3s;
-    width: 8.1771vw !important;
-    height: 6.875vw !important;
+    max-width: 157.0003px !important;
+    max-height: 132px !important;
+    min-width: 157.0003px !important;
+    min-height: 132px !important;
   }
 
-  .car2 {
-    top: 35%;
-    left: -10%;
-    animation-delay: 0s;
-    width: 3.6458vw !important;
-    height: auto !important;
-  }
+  // .car2 {
+  //   top: 35%;
+  //   left: -10%;
+  //   animation-delay: 0s;
+  //   width: 69.9994px !important;
+  //   height: auto !important;
+  // }
 
-  .cart2 {
-    top: 35%;
-    right: -8%;
-    animation-delay: 0.3s;
-    width: 16% !important;
-  }
+  // .cart2 {
+  //   top: 35%;
+  //   right: -8%;
+  //   animation-delay: 0.3s;
+  //   width: 16% !important;
+  // }
 
-  .dress2 {
-    top: 10%;
-    left: -8%;
-    animation-delay: 0.6s;
-    height: auto !important;
-    width: 80% !important;
-    max-width: 18.2292vw !important;
-  }
+  // .dress2 {
+  //   top: 10%;
+  //   left: -8%;
+  //   animation-delay: 0.6s;
+  //   height: auto !important;
+  //   width: 80% !important;
+  //   max-width: 350.0006px !important;
+  // }
 
   // 浮动动画
   @keyframes float {
@@ -168,7 +177,7 @@ const handleArrowError = (e) => {
     }
 
     50% {
-      transform: translateY(-0.7813vw);
+      transform: translateY(-15.001px);
     }
   }
 
@@ -176,12 +185,12 @@ const handleArrowError = (e) => {
   //   width: 100%;
   //   display: flex;
   //   justify-content: center;
-  //   padding: 1.5625vw 0;
+  //   padding: 30px 0;
   //   margin-top: auto;
   // }
   .btn {
-    width: 20.2604vw;
-    height: 7.2396vw;
+    width: 388.9997px;
+    height: 139.0003px;
     padding: 0;
     background-image: url(../../assets/index/矩形2.png);
     background-repeat: no-repeat;
@@ -189,21 +198,21 @@ const handleArrowError = (e) => {
   }
 
   .custom-btn {
-    width: 20.2604vw;
-    height: 7.2396vw;
+    width: 388.9997px;
+    height: 139.0003px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5625vw;
+    font-size: 30px;
     background: transparent;
     padding: 0;
-    padding-bottom: .7292vw;
+    padding-bottom: 14.0006px;
   }
 
   .custom-icon {
-    width: 1.8229vw;
-    height: 1.8229vw;
-    margin-left: .7813vw;
+    width: 34.9997px;
+    height: 34.9997px;
+    margin-left: 15.001px;
   }
 }
 </style>

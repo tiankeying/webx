@@ -2,12 +2,10 @@
   <div>
     <!-- 非移动端显示 AppNavbar copy.vue 的内容 -->
     <div>
-      <header
-        style="display: flex; align-items: center; height: 5.2083vw;justify-content: center;box-shadow: 0px .1563vw .3646vw 0px rgba(219,219,219,0.22);max-width: 100vw; margin: 0 auto; padding: 0 16.15vw;">
+      <header class="homepage01">
         <!-- Logo -->
-        <div style=" display: flex; align-items: center;">
-          <img src="@/assets/logo@2x.png" alt="WebX Logo"
-            style="width: 6.1979vw; height: 2.5vw; object-fit: contain; display: block;" />
+        <div class="logo" style=" display: flex; align-items: center;">
+          <img src="@/assets/logo@2x.png" alt="WebX Logo" />
           <!-- Navigation -->
 
         </div>
@@ -20,20 +18,19 @@
 
         <!-- Language Button -->
         <!-- <button
-          style="display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: 40px; width: 90px; height: 48px; border-radius: 9999px; background-color: black; color: white; font-size: 20px; font-family: 'Source Han Sans SC';">
-          <img src="../assets/图标：世界.png" alt="" style="width: 27px; height: 27px; margin-right: 6px;" />
+          style="display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: 2.0833vw; width: 4.6875vw; height: 2.5vw; border-radius: 520.7813vw; background-color: black; color: white; font-size: 1.0417vw; font-family: 'Source Han Sans SC';">
+          <img src="../assets/图标：世界.png" alt="" style="width: 1.4063vw; height: 1.4063vw; margin-right: .3125vw;" />
           En
         </button> -->
         <div class="font-size-lg">
-          <div style=" margin-left: 1.3542vw;margin-right: .8333vw;">
-            <img :src="globeIcon" alt="Globe Icon" style="width: 1.4063vw;
-                  height: 1.4063vw;display: block;">
+          <div class="btn-size">
+            <img :src="globeIcon" alt="Globe Icon">
           </div>
           <div class="rounded common-btn-size">
-            <!-- <img v-if="locale === 'en'" fill="none" src="../assets/en.png" alt="" @click="toggleDropdown" style="width: 1.8229vw;
-                  height: 1.8229vw;">
-            <img v-if="locale === 'zh-TW'" fill="none" src="../assets/中.png" alt="" @click="toggleDropdown" style="width: 1.8229vw;
-                  height: 1.8229vw;"> -->
+            <!-- <img v-if="locale === 'en'" fill="none" src="../assets/en.png" alt="" @click="toggleDropdown" style="width: 34.9997px;
+                  height: 34.9997px;">
+            <img v-if="locale === 'zh-TW'" fill="none" src="../assets/中.png" alt="" @click="toggleDropdown" style="width: 34.9997px;
+                  height: 34.9997px;"> -->
 
             <!-- <img src="../assets/log up.png" alt=""> -->
             <div class="font-size" @click="toggleDropdown">
@@ -41,7 +38,7 @@
               {{ locale === 'en' ? $t('navbar.language.en') : $t('navbar.language.tw') }}
             </div>
             <!-- <button class=""
-                style=" padding: 0.37vw 1.77vw;border-radius: 0.5vw; font-size: 0.73vw;background-color: #000;color: #FFFFFF;">En</button> -->
+                style=" padding: 7.104px 33.984px;border-radius: 9.6px; font-size: 14.016px;background-color: #000;color: #FFFFFF;">En</button> -->
           </div>
         </div>
       </header>
@@ -135,7 +132,7 @@ const isMobile = computed(() => windowWidth.value <= 750);
 
 const toggleDropdown = () => {
   console.log(lgTitle.value);
-  
+
   if (lgTitle.value === '繁体') {
     // 从繁体切换到英文
     lgTitle.value = 'English';
@@ -290,26 +287,39 @@ const toggleDropdownContent = (item) => {
 
 <style scoped lang="scss">
 .homepage01 {
-  // padding: 1.2vw 311px;
-  background-color: #fff;
-  text-align: center;
-height: 5.2083vw;
+  display: flex;
+    align-items: center;
+    height: 99.9994px;
+    justify-content: center;
+    box-shadow: 0px 3.001px 7.0003px 0px rgba(219, 219, 219, 0.22);
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 310.08px;
+
   .navbar-nav {
     display: flex;
   }
 }
-.object-contain{
-  
-  margin-top: 1.5104vw;
-  width: 6.1979vw;
-  height: 2.5vw;
-  margin-bottom: 1.1979vw;
+
+.logo img{
+  width: 118.9997px; 
+  height: 48px; 
+  object-fit: contain; 
+  display: block
 }
 
-.font-size-lg{
-width: 6.7188vw;
-  height: 2.8646vw;
-  border-radius: 1.4063vw;
+.object-contain {
+
+  margin-top: 28.9997px;
+  width: 118.9997px;
+  height: 48px;
+  margin-bottom: 22.9997px;
+}
+
+.font-size-lg {
+  width: 129.001px;
+  height: 55.0003px;
+  border-radius: 27.001px;
   background: #000000;
   border: none;
   display: flex;
@@ -317,46 +327,57 @@ width: 6.7188vw;
   justify-content: center;
   cursor: pointer;
 }
-.font-size{
-  width: 1.7188vw;
+.btn-size{
+   margin-left: 26.0006px;
+   margin-right: 15.9994px;
+}
+
+.btn-size img{
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.font-size {
+  width: 33.001px;
   color: #FFFFFF;
-  font-size: 1.6667vw;
+  font-size: 26px;
   font-weight: 400;
   font-family: Source Han Sans SC;
-padding: 0;
-  // margin-left: 70px;
-  margin-right: 1.3542vw;
+  padding: 0;
+  // margin-left: 3.6458vw;
+  margin-right: 26px;
 }
 
 
 /* 新增自定义移动端菜单样式 */
 .custom-mobile-menu {
-  width: 46.67vw;
-  height: 80vw;
+  width: 896.064px;
+  height: 1536px;
   position: fixed;
   /* 使用 fixed 定位确保悬浮在页面上 */
   right: 0;
   /* 确保菜单在页面最右边 */
-  top: 20.8vw;
+  top: 399.36px;
   /* 确保菜单超出页面高度时可以滚动 */
   overflow-y: auto;
   z-index: 50;
   /* 确保菜单显示在其他元素之上 */
   background-color: white;
   /* 确保背景颜色 */
-  box-shadow: 0 0 1.33vw rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 25.536px rgba(0, 0, 0, 0.1);
   /* 保留阴影效果 */
 }
 
 .button_text2 {
-  border: .0521vw #000000 solid;
+  border: 1.0003px #000000 solid;
   color: #000000;
   background-color: #fff;
-  padding: .3646vw 1.77vw;
-  font-size: .8333vw;
+  padding: 7.0003px 33.984px;
+  font-size: 15.9994px;
   line-height: 1.5;
-  border-radius: 0.5vw;
-  margin-right: .8854vw;
+  border-radius: 9.6px;
+  margin-right: 16.9997px;
   /* 同上 */
 }
 
@@ -365,7 +386,7 @@ padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.4063vw;
+  padding: 27.001px;
   background-color: #000000;
 }
 
@@ -374,20 +395,20 @@ padding: 0;
 }
 
 /* 非移动端媒体查询 */
-@media (min-width: 40.0521vw) {
+@media (min-width: 769.0003px) {
   .card-title {
-    font-size: 1.042vw;
+    font-size: 20.0064px;
     font-weight: 500;
   }
 
   .card-text {
-    font-size: .8333vw;
+    font-size: 15.9994px;
   }
 
   .dropdown-content {
-    margin-top: .8333vw;
+    margin-top: 15.9994px;
     display: block;
-    /* margin-left: -463px; */
+    /* margin-left: -24.1146vw; */
   }
 
   .dropdown-content:hover {
@@ -429,12 +450,12 @@ padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5625vw;
+  padding: 30px;
 }
 
 .Aboutcard1 {
-  width: 15vw;
-  margin-right: 1.5625vw;
+  width: 288px;
+  margin-right: 30px;
 }
 
 /* 隐藏下拉内容 */
@@ -442,12 +463,12 @@ padding: 0;
   display: none;
   position: absolute;
   background: #000000;
-  box-shadow: 0 .4167vw .8333vw rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8.0006px 15.9994px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   /* padding: 1rem; */
-  width: 25vw;
-  height: 14.58vw;
-  border-radius: .4167vw;
+  width: 480px;
+  height: 279.936px;
+  border-radius: 8.0006px;
 }
 
 /* 鼠标悬停时显示 */
@@ -456,17 +477,17 @@ padding: 0;
 }
 
 /* 移动端媒体查询 */
-@media (max-width: 40vw) {
+@media (max-width: 768px) {
   .mobile-menu {
     position: fixed;
-    top: 3.125vw;
+    top: 60px;
     /* 根据导航栏高度调整 */
     left: 0;
     right: 0;
     bottom: 0;
     background-color: #000;
     z-index: 1000;
-    /* padding: 1.042vw; */
+    /* padding: 20.0064px; */
     overflow-y: auto;
   }
 
@@ -491,17 +512,17 @@ padding: 0;
   }
 
   .card-title {
-    font-size: 1.3021vw;
+    font-size: 25.0003px;
     font-weight: 500;
   }
 
   .card-text {
-    font-size: .7292vw;
+    font-size: 14.0006px;
     color: #C7C6C6;
   }
 
   .h5Molde {
-    width: 5.2083vw;
+    width: 99.9994px;
     height: 100vh;
     background-color: #000000;
   }
@@ -514,14 +535,14 @@ padding: 0;
   .absolute ul li a {
     text-decoration: none;
     color: #333333;
-    font-size: 1.25vw;
+    font-size: 24px;
   }
 
   /* 确保 active-mobile2 类的样式优先级足够 */
   .active-mobile2 {
     background-color: #E9E9E9;
     color: #333333;
-    font-size: 1.25vw;
+    font-size: 24px;
   }
 
   .absolute ul {
@@ -532,7 +553,7 @@ padding: 0;
   /* 修改菜单项样式 */
   .absolute ul li {
     color: #333333;
-    font-size: 1.25vw;
+    font-size: 24px;
   }
 
   .active-mobile .nav-link.gradient-text {
@@ -577,7 +598,7 @@ padding: 0;
   .Aboutcard1,
   .Aboutcard2 {
     margin-right: 0;
-    margin-bottom: 1.042vw;
+    margin-bottom: 20.0064px;
   }
 
   .Aboutcard2:last-child {
@@ -586,15 +607,15 @@ padding: 0;
 
   .d-flex button {
     width: 100%;
-    margin-top: .5208vw;
+    margin-top: 9.9994px;
   }
 
   .nav-item {
-    margin-bottom: 1.042vw;
+    margin-bottom: 20.0064px;
   }
 }
 
-@media (max-width: 51.6667vw) {
+@media (max-width: 992.0006px) {
 
   /* 确保在移动端下拉菜单中按钮独占一行 */
   .navbar-collapse .d-flex {
@@ -613,16 +634,16 @@ padding: 0;
   }
 }
 
-@media (min-width: 51.6667vw) {
+@media (min-width: 992.0006px) {
   .navbar-nav .nav-item {
-    margin-left: 2.7604vw;
-    font-size: 1.042vw;
-    /* padding: 30px; */
-    margin-top: .5208vw;
+    margin-left: 52.9997px;
+    font-size: 20.0064px;
+    /* padding: 1.5625vw; */
+    margin-top: 9.9994px;
   }
 }
 
-@media (max-width: 40vw) {
+@media (max-width: 768px) {
   .navbar {
     /* padding: 0.5rem 1rem; */
   }
@@ -654,18 +675,17 @@ padding: 0;
   /* ⭐ 平均分布导航项 */
   align-items: center;
   flex: 1;
-  // max-width: 750px;
+  // max-width: 39.0625vw;
   /* 控制总宽度 */
-  // margin-right: 10px;
+  // margin-right: .5208vw;
   /* 和两边拉开一点距离 */
 }
 
 .nav a {
-  font-size: 1.3542vw;
+  font-size: 26.0006px;
   font-weight: 400;
   color: #000000;
   font-family: 'Source Han Sans SC', sans-serif;
   text-decoration: none;
 }
-
 </style>

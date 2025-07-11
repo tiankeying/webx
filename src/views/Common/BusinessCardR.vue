@@ -2,10 +2,7 @@
   <div class="business-card" :style="containerStyle">
     <div class="business-container">
       <div class="main-image-wrapper">
-        <!-- 主图 -->
         <img class="main-image" :src="mainImage" alt="" @error="handleImageError">
-
-        <!-- 动态渲染浮动小图标 -->
         <img v-for="(icon, index) in floatingIcons" :key="index" :class="['floating-icon', icon.className]"
           :src="icon.src" :alt="icon.alt" @error="handleIconError">
       </div>
@@ -15,10 +12,6 @@
         <div> {{ buttonText }}</div>
         <img :src="arrowIcon" class="custom-icon" @error="handleArrowError">
       </div>
-      <!-- <van-button round type="info" class="custom-btn">
-        {{ buttonText }}
-        <img :src="arrowIcon" class="custom-icon" @error="handleArrowError">
-      </van-button> -->
     </div>
   </div>
 </template>
@@ -40,10 +33,10 @@ const props = defineProps({
   floatingIcons: { type: Array, required: true },
   // 按钮文本
   buttonText: { type: String, required: true },
-  // 容器尺寸（格式：{ width: '27.1354vw', height: '29.0625vw' }）
+  // 容器尺寸（格式：{ width: '520.9997px', height: '558px' }）
   size: {
     type: Object,
-    default: () => ({ width: '27.1354vw', height: '29.0625vw' })
+    default: () => ({ width: '520.9997px', height: '558px' })
   },
   // 是否显示按钮
   showButton: {
@@ -80,14 +73,14 @@ const handleArrowError = (e) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2.8646vw;
-
-
+  justify-content: center;
+max-height: 800.0006px;
+  min-height: 650.0006px;
+  max-width: 512px;
   .business-container {
     width: 100%;
-    max-width: 31.25vw;
-    margin: 1.0417vw auto 0;
+    min-width: 472px;
+    max-width: 472px;
     flex: 1;
     display: flex;
     align-items: center;
@@ -95,8 +88,11 @@ const handleArrowError = (e) => {
 
   .main-image-wrapper {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    border: 1px solid transparent;
   }
 
   .main-image {
@@ -108,97 +104,71 @@ const handleArrowError = (e) => {
 
   .floating-icon {
     position: absolute;
-    width: 25%;
+    max-width: 468px;
     height: auto;
     animation: float 3s ease-in-out infinite;
     z-index: 2;
   }
 
-  // 添加缺失的浮动图标定位类
-  .car {
-    top: 25%;
-    left: -8%;
-    animation-delay: 0s;
-    width: 18% !important;
-  }
-
-  .dress {
-    top: 5%;
-    left: 12%;
-    animation-delay: 0.6s;
-    width: 20% !important;
-  }
-
-  .cart {
-    top: 18%;
-    right: -8%;
-    animation-delay: 0.3s;
-    width: 18% !important;
-  }
-
   .car2 {
-    top: 16.5625vw;
-    left: -2.2396vw;
+    top: 318px;
+    left: -43.0003px;
     animation-delay: 0s;
-    width: 5.3438vw !important;
-    height: 7.276vw !important;
+    width: 102.601px !important;
+    height: 139.6992px !important;
   }
 
   .cart2 {
-    top: 15.2083vw;
-    right: -1.7188vw;
+    top: 291.9994px;
+    right: -33.001px;
     animation-delay: 0.3s;
-    width: 8.3542vw !important;
-    height: 7.901vw !important;
+    width: 160.4006px !important;
+    height: 151.6992px !important;
   }
 
   .dress2 {
-    top: 7.1354vw;
-    left: 0;
+    top: 137px;
+    // left:20px;
+    transform: translateX(-50%);
     animation-delay: 0.6s;
-    width: 26.151vw !important;
-    height: 12.6771vw !important;
+    width: 502.0992px !important;
+    height: 243.4003px !important;
   }
 
-  // 浮动动画
   @keyframes float {
-
-    0%,
-    100% {
+    0%, 100% {
       transform: translateY(0);
     }
-
     50% {
-      transform: translateY(-0.7813vw);
+      transform: translateY(-15.001px);
     }
   }
 
   .btn {
-    width: 20.2604vw;
-    height: 7.2396vw;
+    width: 388.9997px;
+    height: 139.0003px;
     padding: 0;
     background-image: url(../../assets/index/矩形2.png);
     background-repeat: no-repeat;
     background-size: cover;
   }
 
-
   .custom-btn {
-    width: 20.2604vw;
-      height: 7.2396vw;
+    width: 388.9997px;
+    height: 139.0003px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5625vw;
+    font-size: 30px;
     background: transparent;
     padding: 0;
-    padding-bottom: .5208vw;
+    padding-bottom: 9.9994px;
   }
 
   .custom-icon {
-    width: 1.8229vw;
-    height: 1.8229vw;
-    margin-left: .7813vw;
+    width: 34.9997px;
+    height: 34.9997px;
+    margin-left: 15.001px;
   }
 }
 </style>

@@ -9,9 +9,19 @@ const routes = [
     component: () => import("../views/Home/HomePage.vue"),
   },
   {
+    path: "/mobile",
+    name: "homeMobile",
+    component: () => import("../views/Home/HomeMobile.vue"),
+  },
+  {
     path: "/Ecosystem",
     name: "Ecosystem",
     component: () => import("../views/Ecosystem/EcosystemPage.vue"),
+  },
+  {
+    path: "/Ecosystem/mobile",
+    name: "EcosystemMobile",
+    component: () => import("../views/Ecosystem/EcosystemMobile.vue"),
   },
   {
     path: "/Media",
@@ -19,51 +29,30 @@ const routes = [
     component: () => import("../views/Contacts/ContactsPage.vue"),
   },
   {
+    path: "/Media/mobile",
+    name: "MediaMobile",
+    component: () => import("../views/Media/MediaMobile.vue"),
+  },
+  {
     path: "/Contacts",
     name: "Contacts",
-
     component: () => import("../views/Media/MediaPage.vue"),
+  },
+  {
+    path: "/Contacts/mobile",
+    name: "ContactsMobile",
+    component: () => import("../views/Contacts/ContactsMobile.vue"),
   },
   {
     path: "/Insight",
     name: "Insight",
     component: () => import("../views/Insight/InsightPage.vue"),
   },
-  // {
-  //   path: '/Ecosystem',
-  //   name: 'Ecosystem',
-  //   component: () => import('../views/Ecosystem/index.vue')
-  // },
   {
     path: "/Market",
     name: "Market",
     component: () => import("../views/Market/index.vue"),
   },
-  // {
-  //     path: '/RWA',
-  //     name: 'RWA',
-  //     component: () => import('../views/Market/RWA.vue')
-  // },
-  // {
-  //     path: '/Early_Stage_Startup',
-  //     name: 'Early_Stage_Startup',
-  //     component: () => import('../views/Market/Early_Stage_Startup.vue')
-  // },
-  // {
-  //     path: '/Contact',
-  //     name: 'Contact',
-  //     component: () => import('../views/Contact/index.vue')
-  // },
-  // {
-  //     path: '/singUp',
-  //     name: 'singUp',
-  //     component: () => import('../views/singUp/index.vue')
-  // },
-  // {
-  //     path: '/AniVault',
-  //     name: 'AniVault',
-  //     component: () => import('../views/AniVault/index.vue')
-  // }
 ];
 const router = createRouter({
     history: createWebHashHistory(),
@@ -105,6 +94,38 @@ router.afterEach(() => {
             console.error('隐藏导航栏时出错:', error);
         }
     });
+});
+
+// 添加全局前置守卫
+router.beforeEach((to, from, next) => {
+  const isMobile = window.innerWidth < 768 || 
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+  // 桌面端路径访问检查
+  if (isMobile && ['/', '/Ecosystem', '/Media', '/Contacts'].includes(to.path)) {
+    const mobilePath = {
+      '/': '/mobile',
+      '/Ecosystem': '/Ecosystem/mobile',
+      '/Media': '/Media/mobile',
+      '/Contacts': '/Contacts/mobile'
+    }[to.path];
+    next(mobilePath);
+    return;
+  }
+  
+  // 移动端路径访问检查
+  if (!isMobile && ['/mobile', '/Ecosystem/mobile', '/Media/mobile', '/Contacts/mobile'].includes(to.path)) {
+    const desktopPath = {
+      '/mobile': '/',
+      '/Ecosystem/mobile': '/Ecosystem',
+      '/Media/mobile': '/Media',
+      '/Contacts/mobile': '/Contacts'
+    }[to.path];
+    next(desktopPath);
+    return;
+  }
+  
+  next();
 });
 export default router
 

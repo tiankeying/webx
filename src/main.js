@@ -1,29 +1,33 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import { createPinia } from 'pinia';
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
-import { setI18nLocale } from './locales/i18n.js';
-import i18n from './locales/i18n.js'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import { setI18nLocale } from "./locales/i18n.js";
+import i18n from "./locales/i18n.js";
 
-import '@/iconfont/iconfont.css'
+import "@/iconfont/iconfont.css";
 // 导入 naive-ui
 // import naive from 'naive-ui';
 // 导入 vant 组件库
-import Vant from 'vant';
+import Vant from "vant";
 // 导入 vant 样式
-import 'vant/lib/index.css';
-import '@/styles/global.scss';
+import "vant/lib/index.css";
+import "@/styles/global.scss";
 // Bootstrap 5 CSS + JS
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // 包含 Popper.js
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; // 包含 Popper.js
 
 // 导入 Font Awesome 相关模块
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { faXTwitter, faDiscord, faTelegram, faMedium } from '@fortawesome/free-brands-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faXTwitter,
+  faDiscord,
+  faTelegram,
+  faMedium,
+} from "@fortawesome/free-brands-svg-icons";
 
 library.add(faArrowUp, faXTwitter, faDiscord, faTelegram, faMedium);
 
@@ -57,9 +61,8 @@ library.add(faArrowUp, faXTwitter, faDiscord, faTelegram, faMedium);
 // window.addEventListener("resize", setRemBase);
 // window.addEventListener("orientationchange", setRemBase);
 
-
 const app = createApp(App);
-app.component('font-awesome-icon', FontAwesomeIcon);
+app.component("font-awesome-icon", FontAwesomeIcon);
 // 1. 先安装 Pinia
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate); // 添加这一行
@@ -74,7 +77,7 @@ app.use(Vant);
 // app.use(naive);
 // app.use(BootstrapVue3); // 启用 BootstrapVue3
 
-app.mount('#app');
+app.mount("#app");
 
 // 在 Pinia 安装后设置语言
 setI18nLocale(app);

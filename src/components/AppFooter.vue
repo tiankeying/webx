@@ -3,59 +3,50 @@
   <div style="background-color: #000000;" class="text-white-box">
     <div class="homepage01 text-white">
       <footer>
-        <div
-          style="display: flex; justify-content: flex-start; flex-wrap: wrap;align-items:center;height: 2.3958vw; gap: 20.5729vw;  margin: 0 auto; width: 100%;">
+        <div class="footer-section">
           <!-- 左边部分 -->
           <div class="footer-left-align">
             <div>
               <router-link to="/" class="text-white text-decoration-none">
-                <img src="@/assets/Webx-白色版本.png" alt="WebX Logo" class="w-32 h-12 object-contain"
-                  style="width: 5.9375vw; height: 2.3958vw;">
+                <img src="@/assets/Webx-白色版本.png" alt="WebX Logo" class="w-32 h-12 object-contain">
               </router-link>
             </div>
-            <!-- <div class="d-flex" style=" margin:1.93vw 0  0.89vw; gap: 48px;"> -->
 
           </div>
           <!-- 右边部分 -->
-          <div class="" style="display: flex; justify-content: flex-start; align-items: flex-start; gap: 7.4479vw;">
-            <div class="">
-              <router-link style="font-size: 0.9375vw; color: #FFFFFF; text-decoration: none;" to="/">
-                <h3
-                  style="font-size: .9375vw;font-weight: 400;font-family: Source Han Sans SC; color: #FFFFFF;line-height: 2.3958vw;"
-                  class="h3">{{ $t('navbar.home') }}</h3>
+          <div class="footer-right-align">
+            <div>
+              <router-link class="link" to="/">
+                <h3 class="h3">{{ $t('navbar.home') }}</h3>
               </router-link>
             </div>
-            <div class="">
-              <router-link style="font-size: 0.9375vw; color: #FFFFFF; text-decoration: none;" to="/Ecosystem">
-                <h3
-                  style="font-size: .9375vw;font-weight: 400;font-family: Source Han Sans SC;color: #FFFFFF;line-height: 2.3958vw;"
-                  class="h3">{{ $t('navbar.ecosystem') }}</h3>
-              </router-link>
 
-            </div>
-            <div class="">
-              <router-link style="font-size: 0.9375vw; color: #FFFFFF; text-decoration: none;" to="/Media">
-                <h3
-                  style="font-size: .9375vw;font-weight: 400;font-family: Source Han Sans SC; color: #FFFFFF;line-height: 2.3958vw;"
-                  class="h3">{{ $t('navbar.media') }}</h3>
+            <div>
+              <router-link class="link" to="/Ecosystem">
+                <h3 class="h3">{{ $t('navbar.ecosystem') }}</h3>
               </router-link>
             </div>
-            <div class="">
-              <router-link style="font-size: 0.9375vw; color: #FFFFFF; text-decoration: none;" to="/Contacts">
-                <h3
-                  style="font-size: .9375vw;font-weight: 400;font-family: Source Han Sans SC;line-height: 2.3958vw; color: #FFFFFF;"
-                  class="h3">{{ $t('navbar.contacts') }}</h3>
+
+            <div>
+              <router-link class="link" to="/Media">
+                <h3 class="h3">{{ $t('navbar.media') }}</h3>
+              </router-link>
+            </div>
+
+            <div>
+              <router-link class="link" to="/Contacts">
+                <h3 class="h3">{{ $t('navbar.contacts') }}</h3>
               </router-link>
             </div>
           </div>
         </div>
-        <div class="d-flex" style="  gap: 2.5vw;display: flex;margin-top: 2.0833vw;">
-          <a href="#" class="font-awesome-icon hover-opacity"> <img src="../assets/icon.png" alt=""
-              style="width: 1.6146vw; height: .9375vw;"></a>
-          <a href="#" class="font-awesome-icon hover-opacity"> <img src="../assets/推特.png" alt=""
-              style="width: 1.3021vw; height: 1.0938vw;"></a>
-          <a href="#" class="font-awesome-icon hover-opacity"> <img src="../assets/邮件,邮箱.png" alt=""
-              style="width: 1.25vw; height: .9375vw;"></a>
+        <div class="d-flex">
+          <a href="https://medium.com/@webx" class="font-awesome-icon hover-opacity"> <img src="../assets/icon.png" alt=""
+              class="font-awesome-icon-img1"></a>
+          <a href="https://x.com/WebX_vip" target="_blank" class="font-awesome-icon hover-opacity"> <img src="../assets/推特.png" alt=""
+              class="font-awesome-icon-img2"></a>
+          <a href="mailto:webx@webx.vip" class="font-awesome-icon hover-opacity"> <img src="../assets/邮件,邮箱.png" alt=""
+              class="font-awesome-icon-img3"></a>
         </div>
         <!-- 版权信息 -->
         <div class="copyright-section">
@@ -67,7 +58,7 @@
 
 
     <!-- 回顶部按钮 -->
-    <div ref="backTopButton" class="position-fixed  bottom-0 end-0 m-3"
+    <div ref="backTopButton" class="position-fixed  bottom-0 end-0 m-3 back-to-top"
       :style="{ display: isBackTopVisible ? 'block' : 'none' }">
       <a class="btn btn-secondary" @click="scrollToTop">
         <font-awesome-icon icon="fa-solid fa-arrow-up" />
@@ -75,6 +66,8 @@
     </div>
   </div>
 </template>
+
+
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -126,32 +119,47 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 // .homepage01{
-//   padding:5.21vw   15.625vw;
-//   height: 268.5px;
+//   padding:100.032px   300px;
+//   height: 13.9844vw;
 // }
 .text-white-box{
-height: 13.9844vw;
+max-height: 268.5px;
+min-height: 268.5px;
 }
 .homepage01 {
-  // padding: 75px 20px;
-  padding-top: 3.9063vw;
+  // padding: 3.9063vw 1.0417vw;
+  padding-top: 75.001px;
   
  display: flex;
  justify-content: center;
- 
   // margin: 0 auto;
   box-sizing: border-box;
 }
+.footer-section { 
+  display: flex; 
+  justify-content: flex-start; 
+  flex-wrap: wrap;align-items:center;
+  height: 45.9994px; 
+  gap: 394.9997px;  
+  margin: 0 auto; width: 100%;
+}
+
+.footer-section .object-contain{
+  width: 114px;
+  height: 46px;
+}
+
 .homepage01 div{
-  height: 2.3958vw;
+  height: 46px;
 }
 .footer-left-align{
-  height: 2.3958vw;
+  max-height: 46px;
+  max-width: 114px;
 }
 
 .mobile_footer {
   background-color: #000000;
-  padding: 2vw 4vw; /* 15px / 750 * 100 = 2vw, 30px / 750 * 100 = 4vw */
+  padding: 38.4px 76.8px; /* .7813vw / 750 * 100 = 38.4px, 1.5625vw / 750 * 100 = 76.8px */
 }
 
 .mobile_footer1 {
@@ -161,53 +169,54 @@ height: 13.9844vw;
 }
 
 .mobile_text {
-  font-size: 1.866vw; /* 14px / 750 * 100 = 1.866vw */
+  font-size: 35.8272px; /* .7292vw / 750 * 100 = 35.8272px */
   color: #969DA2;
-  margin-right: 2.666vw; /* 20px / 750 * 100 = 2.666vw */
-  line-height: 3vw;
+  margin-right: 51.1872px; /* 1.0417vw / 750 * 100 = 51.1872px */
+  line-height: 57.6px;
 }
 
 .mobile_footer1_t {
   h2 {
     color: #EAEAEA;
-    font-size: 2.666vw; /* 20px / 750 * 100 = 2.666vw */
-    margin: 4.933vw 0; /* 37px / 750 * 100 = 4.933vw */
+    font-size: 51.1872px; /* 1.0417vw / 750 * 100 = 51.1872px */
+    margin: 94.7136px 0; /* 1.9271vw / 750 * 100 = 94.7136px */
   }
   p {
     color: #969DA2;
-    font-size: 2.133vw; /* 16px / 750 * 100 = 2.133vw */
+    font-size: 40.9536px; /* .8333vw / 750 * 100 = 40.9536px */
   }
 }
 .footer-with-background{
   // height: 25vh;
-  padding: 3.125vw 0 0;
+  padding: 60px 0 0;
   background-color: #000000;
 }
 // 添加新样式规则
 footer h3 {
-  font-size: .8333vw;
+  font-size: 15.9994px;
 }
 
 .list-unstyled{
-  margin-top: 1.9792vw;
-  padding-bottom: 1.9792vw;
+  margin-top: 38.0006px;
+  padding-bottom: 38.0006px;
 }
 .list-unstyled li {
-  padding-bottom: 1.0417vw;
+  padding-bottom: 20.0006px;
   color: #969DA2;
-  font-size: .7292vw;
+  font-size: 14.0006px;
 }
 .h3{
   color: #EAEAEA;
-  font-size: .9375vw;
+  font-size: 18px;
 }
 // 添加媒体查询
-@media (max-width: 39.9479vw) {
+@media (max-width: 766.9997px) {
   .footer-with-background {
-    padding:  0 0 .7813vw;
+    padding:  0 0 15.001px;
+    
   }
   .list-unstyled li {
-    padding-bottom: .7813vw; /* 增加列表项的底部间距 */
+    padding-bottom: 15.001px; /* 增加列表项的底部间距 */
   }
   .row.g-4 {
     flex-direction: column;
@@ -220,10 +229,67 @@ footer h3 {
 }
 .copyright-text {
   color: #969DA2;
-  font-size: 0.75vw;
+  font-size: 14.4px;
   font-family: 'Source Han Sans SC', sans-serif;
   font-weight: 400;
   margin: 0;
-  padding-bottom: 1vw;
+  padding-bottom: 19.2px;
 }
+
+.footer-right-align{
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: flex-start;
+   gap: 142.9997px;
+}
+
+.footer-right-align .h3{
+  font-size: 18px;
+  font-weight: 400;
+  font-family: Source Han Sans SC; 
+  color: #FFFFFF;
+  line-height: 45.9994px;
+}
+
+.footer-right-align .link{
+  font-size: 18px; 
+  color: #FFFFFF; 
+  text-decoration: none;
+}
+
+
+.d-flex {
+gap: 48px;
+display: flex;
+margin-top: 40px;
+
+max-width: 180px;
+}
+.d-flex .font-awesome-icon-img1{ 
+width: 31.0003px; height: 18px;
+}
+.d-flex .font-awesome-icon-img2 {
+  width: 25.0003px; height: 21.001px;
+}
+.d-flex .font-awesome-icon-img3 {
+  width: 24px; height: 18px;
+}
+
+// .back-to-top{
+//   width: 38px;
+//   height: 38px;
+//   border: 1px solid red;
+// }
+// .btn-secondary {
+//   width: 100px;
+//   height: 100px;
+//   max-width: 100px;
+//   max-height: 100px;
+//   position: fixed;
+//   bottom: 200px !important;
+//   left: 0;
+//   right: 0;
+//   border: 1px solid red;
+// }
+
 </style>

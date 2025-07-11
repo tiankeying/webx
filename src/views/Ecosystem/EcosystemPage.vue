@@ -2,39 +2,41 @@
   <div>
     <!-- Business Card -->
     <div class="business">
-      <div class="business-card" style="margin-top: 6.3542vw;">
+      <div class="business-card1">
         <div>
           <div class="business-card-wrapper">
-            <div class="title">{{ $t('ecosystemPage.webxBusiness') }}</div>
-            <div>
-              <p>{{ $t('ecosystemPage.webxBusinessDescription1') }}</p>
-              <p>{{ $t('ecosystemPage.webxBusinessDescription2') }}</p>
+            <div class="business-card-content">
+              <div class="title">{{ $t('ecosystemPage.webxBusiness') }}</div>
+              <div>
+                <p>{{ $t('ecosystemPage.webxBusinessDescription1') }}</p>
+                <p>{{ $t('ecosystemPage.webxBusinessDescription2') }}</p>
+              </div>
             </div>
             <!-- <div class="business-card-btn">
-              <div style="width: 4.69vw; height: 1.25vw;">{{ $t('ecosystemPage.about') }}</div>
+              <div style="width: 90.048px; height: 24px;">{{ $t('ecosystemPage.about') }}</div>
             </div> -->
           </div>
         </div>
         <!-- WebX Business 模块 -->
-        <div style="height: 30.9375vw;margin-left: 1.9271vw;">
+        <div class="business-card-img">
           <BusinessCard :mainImage="businessMainImage" :floatingIcons="businessIcons"
-            :buttonText="$t('ecosystemPage.webxBusiness')" :size="{ width: '26.6667vw', height: '30.9375vw' }"
+            :buttonText="$t('ecosystemPage.webxBusiness')" :size="{ width: '512.0006px', height: '800px' }"
             :showButton="false" />
         </div>
 
       </div>
-      <div style="width: 45%;display: flex;justify-content: center;align-items: center;" @click="openWebxBusiness">
+      <div class="business-btn" @click="openWebxBusiness">
         <div class="business-card-btn">
-          <div style="width: 4.69vw; height: 1.25vw;">{{ $t('ecosystemPage.about') }}</div>
+          <div>{{ $t('ecosystemPage.about') }}</div>
         </div>
       </div>
     </div>
     <!-- Game Card 模块 -->
-    <div class=" game-card">
+    <div class="game-card">
       <!-- Game Card 模块 -->
-      <div style="height: 36.0417vw;">
+      <div>
         <BusinessCardR :mainImage="gameMainImage" :floatingIcons="gameIcons" :buttonText="$t('ecosystemPage.webxGame')"
-          :size="{ width: '26.8333vw', height: '36.0417vw' }" :showButton="false" />
+          :size="{ width: '515.1994px', height: '692.0006px' }" :showButton="false" />
       </div>
       <div class="game-card-wrapper">
         <div class="title">{{ $t('ecosystemPage.webxGame') }}</div>
@@ -44,7 +46,7 @@
           </p>
         </div>
         <div class="business-card-btn" @click="openWebxGame">
-          <div style="width:4.69vw; height:1.25vw;">{{ $t('ecosystemPage.about') }}</div>
+          <div>{{ $t('ecosystemPage.about') }}</div>
         </div>
       </div>
 
@@ -92,14 +94,14 @@ const images = import.meta.glob('@/assets/index/卡片*.png', { eager: true, imp
 
 // 根据语言动态计算卡片图片路径
 const cardImage1 = computed(() => {
-  return locale.value === 'en' 
+  return locale.value === 'en'
     ? images['/src/assets/index/卡片1E.png']
     : images['/src/assets/index/卡片1Z.png']  // 假设中文版图片为卡片1C.png
 })
 
 const cardImage2 = computed(() => {
-  return locale.value === 'en' 
-    ? images['/src/assets/index/卡片2E.png'] 
+  return locale.value === 'en'
+    ? images['/src/assets/index/卡片2E.png']
     : images['/src/assets/index/卡片2Z.png']  // 假设中文版图片为卡片2C.png
 })
 
@@ -136,16 +138,39 @@ const openWebxAsset = () => {
 </script>
 
 <style lang="scss" scoped>
+.business{
+  margin-top: 122px;
+}
+.business-card1{
+  display: flex;
+  // border:1px solid red;
+  justify-content: center;
+  max-width: 1920px;
+  gap: 40px;
+  align-items: flex-end;
+}
+.business-card-content{
+  // border: 1px solid red;
+  min-width: 712px;
+  min-height: 503px;
+  max-width: 712px;
+  max-height: 503px;
+}
 .business-card {
   display: flex;
   justify-content: center;
   // align-items: center;
-  gap: 2.0833vw;
+  gap: 40px;
   align-items: flex-end;
+  // border: 1px solid red;
+  max-width: 512px;
+  max-height: 648px;
+  min-width: 512px;
+  min-height: 648px;
 }
 
 .business-card-wrapper {
-  width: 37.0833vw;
+  width: 712px;
   display: flex;
   flex-direction: column;
 }
@@ -153,36 +178,49 @@ const openWebxAsset = () => {
 .business-card-wrapper .title {
   font-family: Alibaba PuHuiTi;
   font-weight: bold;
-  font-size: 2.6042vw;
+  font-size: 50px;
   color: #000000;
-  margin-bottom: 4.4792vw;
+  margin-bottom: 86px;
 }
 
 .business-card-wrapper p {
-  width: 37.0833vw;
+  width: 712px;
   font-family: Source Han Sans SC;
   font-weight: 400;
-  font-size: 1.3542vw;
+  font-size: 26px;
   color: #808080;
-  line-height: 2.2917vw;
+  line-height: 44.0006px;
   word-break: break-word;
   text-align: justify;
+}
+
+.business-card-img {
+  max-width: 510px;
+  height: 594px;
+  margin-left: 37.0003px;
+}
+
+.business-btn{
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .business-card-btn {
   background-image: url(@/assets/index/黄色按钮.png);
   background-size: cover;
-  width: 13.65vw;
-  height: 4.79vw;
+  width: 262px;
+  height: 92px;
   font-family: Alibaba PuHuiTi;
   font-weight: bold;
-  font-size:1.5625vw;;
+  font-size: 30px;
   color: #000000;
   text-align: center;
-  padding: 0 4.48vw;
-  margin-top: 4.74vw;
-  margin-bottom: 11.2vw;
-  line-height: 3.9063vw;
+  padding: 0 86.016px;
+  margin-top: 91px;
+  margin-bottom: 215px;
+  line-height: 75.001px;
   cursor: pointer;
   /* 移除原有的transition */
 }
@@ -197,115 +235,134 @@ const openWebxAsset = () => {
   0% {
     transform: scale(1);
   }
+
   30% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
 }
-.game-card{
+
+.game-card {
   display: flex;
+  // align-items: flex-end;
   justify-content: center;
-  gap: 4.9479vw;
+  gap: 95px;
+  // border: 1px solid red;
+  height: 692px;
+  margin-bottom: 275px;
 }
-.game-card-wrapper{
-  // width: 33.8542vw;
-  // height: 36.0417vw;
-  
+
+.game-card-wrapper {
+  // width: 650.0006px;
+  // height: 692px;
+
 }
-.game-card-wrapper .title{
-    font-family: Alibaba PuHuiTi;
-    font-weight: bold;
-    font-size: 2.6042vw;
-    color: #000000;
-    margin-top: 2.9688vw;
-    margin-bottom: 4.4792vw;
+
+.game-card-wrapper .title {
+  font-family: Alibaba PuHuiTi;
+  font-weight: bold;
+  font-size: 50.0006px;
+  color: #000000;
+  padding-top: 57px;
+  padding-bottom: 86px;
 }
-.game-card-wrapper .content{
-  width: 33.8542vw;
-  height: 15.2083vw;
+
+.game-card-wrapper .content {
+  width: 650px;
+  height: 292px;
   word-break: break-word;
   text-align: justify;
-  margin-bottom: 4.9479vw; 
+  margin-bottom: 95px;
 }
-.game-card-wrapper p{
+
+.game-card-wrapper p {
   font-family: Source Han Sans SC;
-    font-weight: 400;
-    font-size: 1.3542vw;
-    color: #808080;
-    line-height: 2.2917vw;
-    
+  font-weight: 400;
+  font-size: 26.0006px;
+  color: #808080;
+  line-height: 44.0006px;
+
 }
+
 .game-card-wrapper span {
 
   font-family: Source Han Sans SC;
   font-weight: 400;
-  font-size: 1.3542vw;
+  font-size: 26.0006px;
   color: #808080;
-  line-height: 2.2917vw;
+  line-height: 44.0006px;
 }
 
-.collaborator-wrapper .title{
+
+.collaborator-wrapper .title {
   font-family: Alibaba PuHuiTi;
-    font-weight: bold;
-    font-size: 2.6042vw;
-    color: #000000;
-    margin-bottom: 5.625vw;
-    display: flex;
+  font-weight: bold;
+  font-size: 50.0006px;
+  color: #000000;
+  margin-bottom: 108px;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
-.content{
-  height: 35.8333vw;
+
+.content {
+  height: 688px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-bottom: 12.2917vw;
+  margin-bottom: 236.0006px;
 }
 
-.content1{
-  max-width: 67.7083vw;
-  height: 35.8333vw;
+.content1 {
+  max-width: 1300px;
+  height: 688px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   margin: 0 auto;
-  margin-bottom: 12.2917vw;
+  margin-bottom: 236.0006px;
   transition: transform 0.3s ease;
   background-image: url(@/assets/index/图层.png);
   background-size: 50% 120%;
   background-repeat: no-repeat;
   background-position: center;
 }
+
 /* 整个content容器的悬停浮动效果 */
 .content1:hover {
-  transform: translateY(-0.5208vw);
+  transform: translateY(-10px);
   animation: float 2s ease-in-out infinite;
 }
-.content-wrapper1,.content-wrapper2{ 
+
+.content-wrapper1,
+.content-wrapper2 {
   cursor: pointer;
-  
+
 }
+
 /* 浮动动画关键帧 */
 @keyframes float {
 
   0%,
   100% {
-    transform: translateY(-0.5208vw);
+    transform: translateY(-10px);
   }
 
   50% {
-    transform: translateY(-1.0417vw);
+    transform: translateY(-20px);
   }
 }
-.content-wrapper1 img{
-  width: 35.2604vw;
-  height: 33.8542vw;
-}
-.content-wrapper2 img{
-  width: 35.1563vw;
-  height: 35.7813vw;
+
+.content-wrapper1 img {
+  width: 677px;
+  height: 650px;
 }
 
+.content-wrapper2 img {
+  width: 675.001px;
+  height: 687.001px;
+}
 </style>
