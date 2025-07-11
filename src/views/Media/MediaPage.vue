@@ -23,22 +23,6 @@
      </div>
       <div class="card-container container1">
         <div class="card1 large">
-          <div class="h3">{{ $t('contactsPage.howCompaniesLeverageCVAS') }}</div>
-          <div class="data">
-            <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
-            <div class="data-right">
-              {{ $t('contactsPage.dateJun182025') }}
-            </div>
-          </div>
-          <div class="title">{{ $t('contactsPage.cvasCommercialSuccess') }}</div>
-        </div>
-        <div class="card1-img1"><img src="../../assets/index/配图2.png" alt="Ecosystem Image"
-            @click="handleImageClick(ecosystemLinks.link2)" style="cursor: pointer;" /></div>
-      </div>
-
-
-      <div class="card-container container2">
-        <div class="card1 large">
           <div class="h3">{{ $t('contactsPage.trillionDollarSurge') }}</div>
           <div class="data">
             <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
@@ -52,9 +36,10 @@
             @click="handleImageClick(ecosystemLinks.link3)" style="cursor: pointer;" /></div>
       </div>
 
-      <div class="card-container container3">
+
+      <div class="card-container container2">
         <div class="card1 large">
-          <div class="h3 h3-h">{{ $t('contactsPage.coreOfCVAS') }}</div>
+          <div class="h3">{{ $t('contactsPage.coreOfCVAS') }}</div>
           <div class="data">
             <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
             <div class="data-right">
@@ -63,8 +48,23 @@
           </div>
           <div class="title">{{ $t('contactsPage.webxBusinessDescription') }}</div>
         </div>
-        <div class="card1-img"><img src="../../assets/index/配图1.png" alt="Ecosystem Image"
+        <div class="card1-img1"><img src="../../assets/index/配图1.png" alt="Ecosystem Image"
             @click="handleImageClick(ecosystemLinks.link1)" style="cursor: pointer;" /></div>
+      </div>
+
+      <div class="card-container container3">
+        <div class="card1 large">
+          <div class="h3 h3-h">{{ $t('contactsPage.howCompaniesLeverageCVAS') }}</div>
+          <div class="data">
+            <div class="data-left">{{ $t('ecosystemPage.webxBusiness') }}</div>
+            <div class="data-right">
+              {{ $t('contactsPage.dateJun182025') }}
+            </div>
+          </div>
+          <div class="title">{{ $t('contactsPage.cvasCommercialSuccess') }}</div>
+        </div>
+        <div class="card1-img"><img src="../../assets/index/配图2.png" alt="Ecosystem Image"
+            @click="handleImageClick(ecosystemLinks.link2)" style="cursor: pointer;" /></div>
       </div>
     </section>
 
@@ -74,18 +74,30 @@
       <div class="card2-container">
         <div class="card2">
           <img src="../../assets/index/插图1(1).png" alt="WebX Update 1" />
-          <div class="h3">{{ $t('contactsPage.consumerCentricEconomy') }}</div>
-          <div class="span card-p2">{{ $t('contactsPage.dateMay2225') }}</div>
+          <div class="card2-h3">{{ $t('contactsPage.consumerCentricEconomy') }}</div>
+          <!-- <div class="span card-p2">{{ $t('contactsPage.dateMay2225') }}</div> -->
+          <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en1' : 'author-text-zh1']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.dateMay2225')
+            }}</span>
+          </div>
         </div>
         <div class="card2">
           <img src="../../assets/index/插图2(1).png" alt="WebX Update 2" />
           <div class="h3">{{ $t('contactsPage.revolutionizingDigitalPayments') }}</div>
-          <div class="span card-p2">{{ $t('contactsPage.dateMay102025') }}</div>
+          <!-- <div class="span card-p2">{{ $t('contactsPage.dateMay102025') }}</div> -->
+          <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en1' : 'author-text-zh1']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.dateMay102025')
+            }}</span>
+          </div>
         </div>
         <div class="card2">
           <img src="../../assets/index/插图3(1).png" alt="WebX Update 3" />
           <div class="h3">{{ $t('contactsPage.buildingRWA') }}</div>
-          <div class="span card-p2">{{ $t('contactsPage.dateMay052025') }}</div>
+          <!-- <div class="span card-p2">{{ $t('contactsPage.dateMay052025') }}</div> -->
+          <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en1' : 'author-text-zh1']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.dateMay052025')
+            }}</span>
+          </div>
         </div>
       </div>
     </section>
@@ -97,8 +109,8 @@
           <img src="../../assets/index/插图1(2).png" alt="Industry 1" @click="handleImageClick(imageLinks.industry1)"
             style="cursor: pointer;" />
           <div class="h3">{{ $t('contactsPage.hongKongStablecoin') }}</div>
-          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
-            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.bySummerZhenMay212025')
+          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en2' : 'author-text-zh2']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.byBrandonKaeMarch242025')
             }}</span>
           </div>
         </div>
@@ -106,8 +118,8 @@
           <img src="../../assets/index/插图2(2).png" alt="Industry 2" @click="handleImageClick(imageLinks.industry2)"
             style="cursor: pointer;" />
           <div class="h3">{{ $t('contactsPage.stakingSectorOverview') }}</div>
-          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
-            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.byBrandonKaeMarch242025')
+          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en2' : 'author-text-zh2']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.coinGeckoMarch202024')
             }}</span>
           </div>
         </div>
@@ -115,8 +127,8 @@
           <img src="../../assets/index/插图3(2).png" alt="Industry 3" @click="handleImageClick(imageLinks.industry3)"
             style="cursor: pointer;" />
           <div class="h3">{{ $t('contactsPage.rwaReport') }}</div>
-          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
-            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.coinGeckoMarch202024')
+          <div class="span card-p3" :class="[locale === 'en' ? 'author-text-en2' : 'author-text-zh2']">
+            <span style=" white-space: pre-line;">{{ formattedBySummerZhen('contactsPage.bySummerZhenMay212025')
             }}</span>
           </div>
         </div>
@@ -212,7 +224,7 @@ const imageLinks = {
 // 添加生态系统更新部分的链接
 const ecosystemLinks = {
   link1: 'https://medium.com/@WebXBusiness/behind-the-algorithm-how-webx-business-delivers-ai-powered-personalized-d4c1b191d5ce',
-  link2: 'https://medium.com/@WebXBusiness/ai-driven-smart-supply-chain-making-every-product-more-affordable-e82743ee71f9',
+  link2: 'https://medium.com/@WebXBusiness/why-we-prefer-value-added-consumption-6e7b8edb3486',
   link3: 'https://medium.com/@WebXBusiness/webx-business-blending-multicultural-consumer-scenarios-in-a-globalized-strategy-133841819ba1'
 };
 
@@ -243,13 +255,14 @@ console.log('Ecosystem page loaded')
 <style lang="scss" scoped>
 .section,
 .section1 {
-  width: 1350px;
+  width: 1305px;
   margin: auto;
+  border: 1px solid transparent;
 }
 
 .section:first-of-type {
-  margin-top: 177px;
-  max-width: 1420px;
+  margin-top: 179px;
+  max-width: 1305px;
   // border: .0521vw solid #000000;
   margin-bottom: 170px;
   // border: 1px solid red;
@@ -265,27 +278,41 @@ console.log('Ecosystem page loaded')
   word-break: normal;
   white-space: normal;
   overflow-wrap: break-word;
-  margin-bottom: 31px;
-  text-align: justify;
+  margin-bottom: 30px;
+  // text-align: justify;
   /* 均匀对齐文本边缘 */
-  
 }
 
 /* 第一个 .h3 的特定样式 */
 .card-container.container1 .card1 .h3 {
   width: 726px;
+  font-family: Source Han Sans SC;
+font-weight: bold;
+font-size: 24px;
+color: #000000;
   // height: 60px;
 }
 
 /* 第二个 .h3 的特定样式 */
 .card-container.container2 .card1 .h3 {
   width: 646px;
+   font-family: Source Han Sans SC;
+font-weight: bold;
+font-size: 24px;
+color: #000000;
+white-space: pre-wrap; 
+margin-bottom: 36px;
   // height: 59px;
 }
 
 /* 第三个 .h3 的特定样式 */
 .card-container.container3 .card1 .h3 {
   width: 726px;
+   font-family: Source Han Sans SC;
+font-weight: bold;
+font-size: 24px;
+color: #000000;
+margin-bottom: 65px;
   // height: 59px;
 }
 
@@ -301,46 +328,43 @@ console.log('Ecosystem page loaded')
   background: #F2F2F2;
   opacity: 1;
   font-family: Source Han Sans SC;
-  font-weight: 400;
+  font-weight: bold;
   font-size: 18px;
-  color: #8E8E8E;
+  color: #808080;
   text-align: center;
   line-height: 49px;
 }
 
 .data-right {
   margin-left: 37px;
-  height: 18px;
+  height: 19px;
   font-family: Source Han Sans SC;
-  font-weight: 400;
+  font-weight: bold;
   font-size: 18px;
   color: #808080;
   line-height: 24px;
 }
 
 .title {
-  // width: 696px;
+  width: 726px;
   font-family: Source Han Sans SC;
   font-weight: 400;
   font-size: 18px;
   color: #808080;
   line-height: 24px;
-  text-align: justify;
+  // text-align: justify;
+  margin-top: 34px;
+  height: 67px;
   /* 均匀对齐文本边缘 */
 }
 
 /* 第一个 .h3 的特定样式 */
 .card-container.container1 .card1 .title {
-  width: 694px;
-  height: 71px;
-  margin-top: 32px;
+  text-align: justify;
 }
 
 /* 第二个 .h3 的特定样式 */
 .card-container.container2 .card1 .title {
-  width: 721px;
-  height: 71px;
-  margin-top: 31px;
   overflow-wrap: break-word;
   white-space: normal;
   word-break: normal;
@@ -348,11 +372,7 @@ console.log('Ecosystem page loaded')
 
 /* 第三个 .h3 的特定样式 */
 .card-container.container3 .card1 .title {
-  width: 708px;
-  height: 47px;
-  margin-top: 32px;
   white-space: pre-wrap; 
-  // border: 1px solid red;
 }
 
 
@@ -370,7 +390,7 @@ console.log('Ecosystem page loaded')
   width: 505px;
   height: 243px;
   transition: transform 0.3s ease;
-  border-radius: 20px;
+  // border-radius: 20px;
 }
 
 
@@ -381,10 +401,10 @@ console.log('Ecosystem page loaded')
 
 .card2-container img {
   cursor: pointer;
-  width: 419px;
+  width: 418px;
   height: 210px;
   transition: transform 0.3s ease;
-  border-radius: 20px;
+  // border-radius: 20px;
 }
 
 .card2-container img:hover {
@@ -395,15 +415,30 @@ console.log('Ecosystem page loaded')
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 21px;
-  margin-bottom: 170px
+  margin-bottom: 142px;
+  border: 1px solid transparent;
 }
 
-.card2-container img {
-  width: 419px;
-  height: 210px;
+.card2-container  .card2-h3 {
+  margin-top: 34px;
+  width: 418px;
+  border:1px solid transparent;
+  font-family: Source Han Sans SC;
+  font-weight: bold;
+  font-size: 24px;
+  color: #000000;
+  line-height: 34px;
+  min-height: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 大致控制在 3 行内，根据 line-height 来决定 */
+  -webkit-box-orient: vertical;
 }
 
 .card2-container .h3 {
+  
   margin-top: 34px;
   width: 416px;
   border:1px solid transparent;
@@ -423,7 +458,7 @@ console.log('Ecosystem page loaded')
 
 .card2-container .span {
   font-family: Source Han Sans SC;
-  font-weight: 400;
+  font-weight: bold;
   font-size: 18px;
   color: #808080;
   
@@ -431,22 +466,32 @@ console.log('Ecosystem page loaded')
 
 .card2-container .card-p2 {
   margin-top: 37px;
+  // border: 1px solid red;
 }
 
 .card2-container .card-p3 {
-  margin-top: 24px;
+  margin-top: 30px;
 }
-.author-text-en{
+.author-text-en1{
+line-height: 16px;
+transform: translateY(10px);
+border: 1px solid transparent;
+}
+.author-text-cn1{ 
+  line-height: 24px;
+}
+
+.author-text-en2{
 line-height: 14px;
 transform: translateY(10px);
 border: 1px solid transparent;
 }
-.author-text-cn{ 
+.author-text-cn2{ 
   line-height: 24px;
 }
 
 .section h2 {
-  margin-bottom: 56px;
+  margin-bottom: 57px;
   font-family: Alibaba PuHuiTi;
   font-weight: bold;
   font-size: 50px;
@@ -486,9 +531,9 @@ border: 1px solid transparent;
   width: 1300px;
   height: 749px;
   // margin:auto;
-  left: -20px;
+  left: 0px;
   margin-bottom: 176px;
-  // border: 1px solid red;
+  border: 1px solid transparent;
 }
 
 .hub-showcase video {
@@ -632,9 +677,9 @@ border: 1px solid transparent;
   /* 防止视频拉伸 */
 }
 
-.h3-h {
-  height: 67.72px;
-}
+// .h3-h {
+//   margin-bottom: 65px;
+// }
 .webx-ecosystem-updates {
   // position: relative;
   display: flex;
@@ -651,6 +696,7 @@ font-family: Alibaba PuHuiTi;
 font-weight: bold;
 font-size: 50px;
 color: #000000;
+
 }
 
 .more-wrapper {

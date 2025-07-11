@@ -54,7 +54,10 @@
         <div :class="`card${index + 1}` " v-for="(card, index) in webxUpdatesCards" :key="index">
           <img :src="card.image" :alt="$t(card.title)" loading="lazy" />
           <div class="h3">{{ $t(card.title) }}</div>
-          <div class="span card-p2">{{ $t(card.date) }}</div>
+          <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
+            {{ formattedBySummerZhen(card.date) }}
+          </div>
+          <!-- <div class="span card-p2">{{ $t(card.author) }}</div> -->
         </div>
       </div>
     </div>
@@ -163,13 +166,6 @@ const openWebxBusiness = () => {
 // 定义卡片数据
 const updatesCards = [
   {
-    title: 'contactsPage.howCompaniesLeverageCVAS',
-    date: 'contactsPage.dateJun182025',
-    image: cardImage2,
-    content: 'contactsPage.cvasCommercialSuccess',
-    link: 'https://medium.com/@WebXBusiness/ai-driven-smart-supply-chain-making-every-product-more-affordable-e82743ee71f9',
-  },
-  {
     title: 'contactsPage.trillionDollarSurge',
     date: 'contactsPage.dateMay302025',
     image: cardImage3,
@@ -182,6 +178,13 @@ const updatesCards = [
     image: cardImage1,
     content: 'contactsPage.webxBusinessDescription',
     link: 'https://medium.com/@WebXBusiness/behind-the-algorithm-how-webx-business-delivers-ai-powered-personalized-d4c1b191d5ce',
+  },
+  {
+    title: 'contactsPage.howCompaniesLeverageCVAS',
+    date: 'contactsPage.dateJun182025',
+    image: cardImage2,
+    content: 'contactsPage.cvasCommercialSuccess',
+    link: 'https://medium.com/@WebXBusiness/ai-driven-smart-supply-chain-making-every-product-more-affordable-e82743ee71f9',
   }
 ];
 
@@ -206,20 +209,20 @@ const webxUpdatesCards = [
 const industryUpdatesCards = [
   {
     title: 'contactsPage.hongKongStablecoin',
-    author: 'contactsPage.bySummerZhenMay212025',
+    author: 'contactsPage.byBrandonKaeMarch242025',
     image: industryImage1,
     link: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email'
   },
   {
     title: 'contactsPage.stakingSectorOverview',
-    author: 'contactsPage.byBrandonKaeMarch242025',
+    author: 'contactsPage.coinGeckoMarch202024',
     image: industryImage2,
     link: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email'
     
   },
   {
     title: 'contactsPage.rwaReport',
-    author: 'contactsPage.coinGeckoMarch202024',
+    author: 'contactsPage.bySummerZhenMay212025',
     image: industryImage3,
     link: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email'
   }
@@ -231,9 +234,6 @@ const handleImageClick = (url) => {
     window.open(url, '_blank');
   }
 };
-
-
-
 
 onMounted(() => {
   if (videoPlayer.value) {
@@ -556,10 +556,11 @@ border: 1px solid transparent;
   width: 140px;
 margin-top: 23px;
 font-family: Source Han Sans SC;
-font-weight: 400;
+font-weight: bold;
 font-size: 18px;
 color: #808080;
-
+border: 1px solid transparent;
+white-space: pre-line;
 }
 
 .card3{
@@ -569,7 +570,7 @@ color: #808080;
 .card-p1{
 // height: 41px;
 font-family: Source Han Sans SC;
-font-weight: 400;
+font-weight: bold;
 font-size: 18px;
 color: #808080;
 // line-height: 1;
