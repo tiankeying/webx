@@ -73,7 +73,7 @@
       <h2>{{ $t('contactsPage.webxUpdates') }}</h2>
       <div class="card2-container">
         <div class="card2">
-          <img src="../../assets/index/插图1(1).png" alt="WebX Update 1" />
+          <img src="../../assets/index/插图1(1).png" alt="WebX Update 1"  @click="handleImageClick(updatesLinks.industry1)" />
           <div class="card2-h3">{{ $t('contactsPage.consumerCentricEconomy') }}</div>
           <!-- <div class="span card-p2">{{ $t('contactsPage.dateMay2225') }}</div> -->
           <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en1' : 'author-text-zh1']">
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="card2">
-          <img src="../../assets/index/插图2(1).png" alt="WebX Update 2" />
+          <img src="../../assets/index/插图2(1).png" alt="WebX Update 2" @click="handleImageClick(updatesLinks.industry2)"/>
           <div class="h3">{{ $t('contactsPage.revolutionizingDigitalPayments') }}</div>
           <!-- <div class="span card-p2">{{ $t('contactsPage.dateMay102025') }}</div> -->
           <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en1' : 'author-text-zh1']">
@@ -91,7 +91,7 @@
           </div>
         </div>
         <div class="card2">
-          <img src="../../assets/index/插图3(1).png" alt="WebX Update 3" />
+          <img src="../../assets/index/插图3(1).png" alt="WebX Update 3" @click="handleImageClick(updatesLinks.industry3)"/>
           <div class="h3">{{ $t('contactsPage.buildingRWA') }}</div>
           <!-- <div class="span card-p2">{{ $t('contactsPage.dateMay052025') }}</div> -->
           <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en1' : 'author-text-zh1']">
@@ -216,10 +216,17 @@ const handleImageClick = (url) => {
 
 // 定义每张图片对应的跳转链接
 const imageLinks = {
-  industry1: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email', // RWA报告链接
-  industry2: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email', // 香港稳定币相关链接
-  industry3: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email', // 质押行业概览链接
+  industry1: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email', // RWA报告链接
+  industry2: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email', // 香港稳定币相关链接
+  industry3: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email', // 质押行业概览链接
 };
+
+// updates的链接
+const updatesLinks = {
+  industry1: 'https://x.com/WebX_vip/status/1941084085155475469?t=menx04EkE8Z5IWFiaJu8ew&s=19',
+  industry2: 'https://x.com/WebX_vip/status/1940342532636017049?t=M7xFUsDbVEyD8wq2L-R_fg&s=19',
+  industry3: 'https://medium.com/@webx/rwa-tokenization-the-integration-of-blockchain-and-real-world-assets-cce5d125cf6f',
+}
 
 // 添加生态系统更新部分的链接
 const ecosystemLinks = {

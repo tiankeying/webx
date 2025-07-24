@@ -18,7 +18,7 @@
           <p>{{ $t('homePage.digitalInfrastructurePioneer') }}</p>
         </div>
         <div class="grid-item4" @click="animateItem('item4')" :class="{ 'tilt-animation': activeItem === 'item4' }">
-          <p style="margin: 0;line-height: 1.5;">{{ $t('homePage.spanningEcommerce') }}</p>
+          <p style="margin: 0;line-height: 1.5;width: 145px;max-width: 145px;white-space: pre-line;">{{ $t('homePage.spanningEcommerce') }}</p>
         </div>
         <div class="grid-item5" @click="animateItem('item5')" :class="{ 'tilt-animation': activeItem === 'item5' }">
           <p>{{ $t('homePage.capitalIndustrySynergyHub') }}</p>
@@ -301,7 +301,6 @@ gap: 13px 14px; // 新增：行间距13px，列间距14px
 
 .grid-item4 {
   background-image: url('../../assets/m-index/04.png');
-
 }
 
 .grid-item5 {
@@ -318,7 +317,7 @@ gap: 13px 14px; // 新增：行间距13px，列间距14px
   font-family: Source Han Sans SC;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.7);
-  line-height: 39.9994px;
+  line-height: 40px;
   margin: 0;
   padding-bottom:30px;
   width: 290px;

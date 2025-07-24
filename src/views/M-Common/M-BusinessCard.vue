@@ -77,7 +77,8 @@ const handleArrowError = (e) => {
   display: flex;
   flex-direction: column;
   max-height: 556px;
-  margin-left: 122px;
+  margin:0 auto;
+  border: 1px solid transparent;
 
   .main-image-wrapper {
     position: relative;

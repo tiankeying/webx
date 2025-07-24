@@ -52,7 +52,7 @@
       <!-- 卡片容器 -->
       <div class="card-container">
         <div :class="`card${index + 1}` " v-for="(card, index) in webxUpdatesCards" :key="index">
-          <img :src="card.image" :alt="$t(card.title)" loading="lazy" />
+          <img :src="card.image" :alt="$t(card.title)" loading="lazy" @click="handleImageClick(card.link)"/>
           <div class="h3">{{ $t(card.title) }}</div>
           <div class="span card-p2" :class="[locale === 'en' ? 'author-text-en' : 'author-text-zh']">
             {{ formattedBySummerZhen(card.date) }}
@@ -184,7 +184,7 @@ const updatesCards = [
     date: 'contactsPage.dateJun182025',
     image: cardImage2,
     content: 'contactsPage.cvasCommercialSuccess',
-    link: 'https://medium.com/@WebXBusiness/ai-driven-smart-supply-chain-making-every-product-more-affordable-e82743ee71f9',
+    link: 'https://medium.com/@WebXBusiness/why-we-prefer-value-added-consumption-6e7b8edb3486',
   }
 ];
 
@@ -192,17 +192,20 @@ const webxUpdatesCards = [
   {
     title: 'contactsPage.consumerCentricEconomy',
     date: 'contactsPage.dateMay2225',
-    image: updatesImage1
+    image: updatesImage1,
+    link:'https://x.com/WebX_vip/status/1941084085155475469?t=menx04EkE8Z5IWFiaJu8ew&s=19',
   },
   {
     title: 'contactsPage.revolutionizingDigitalPayments',
     date: 'contactsPage.dateMay102025',
-    image: updatesImage2
+    image: updatesImage2,
+    link:'https://x.com/WebX_vip/status/1940342532636017049?t=M7xFUsDbVEyD8wq2L-R_fg&s=19',
   },
   {
     title: 'contactsPage.buildingRWA',
     date: 'contactsPage.dateMay052025',
-    image: updatesImage3
+    image: updatesImage3,
+    link:'https://medium.com/@webx/rwa-tokenization-the-integration-of-blockchain-and-real-world-assets-cce5d125cf6f',
   }
 ];
 
@@ -211,20 +214,21 @@ const industryUpdatesCards = [
     title: 'contactsPage.hongKongStablecoin',
     author: 'contactsPage.byBrandonKaeMarch242025',
     image: industryImage1,
-    link: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email'
+    link: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email'
   },
   {
     title: 'contactsPage.stakingSectorOverview',
     author: 'contactsPage.coinGeckoMarch202024',
     image: industryImage2,
-    link: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email'
+    link: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email'
     
   },
   {
     title: 'contactsPage.rwaReport',
     author: 'contactsPage.bySummerZhenMay212025',
     image: industryImage3,
-    link: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email'
+     link: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email'
+    
   }
 ];
 
@@ -277,7 +281,6 @@ margin: 58px 30px 0;
 }
 
 .Updates-title{
-  
   max-width: 100%; // 替代 width: 451px
     width: auto;
 // height: 36px;
@@ -288,7 +291,7 @@ color: #000000;
 display: flex;
 justify-content: space-between;
 align-items: center;
-margin-bottom: 82px;
+margin-bottom: 83px;
 }
 
 .more-wrapper {
@@ -301,7 +304,6 @@ margin-bottom: 82px;
 .more-icon {
   width: 41.1px; /* Adjusted for mobile, original was 52px */
   height: 9.5px;
-  margin-right: 31px;
 }
 
 .tooltip {
@@ -333,23 +335,41 @@ margin-bottom: 82px;
   content: '';
 }
 
-
-
-.Updates-card2,.Updates-card3{
-  margin-top: 78px;
+.card1-title{
+font-family: Source Han Sans SC;
+font-weight: bold;
+font-size: 22px;
+color: #000000;
+line-height: 29px;
 }
 
-.card1-title,.card2-title,.card3-title{
+.Updates-card1 .card1-title{
+height: 57px;
+}
+
+.Updates-card2 .card1-title{
+height: 52px;
+}
+
+.Updates-card3 .card1-title{
+height: 24px;
+}
+
+.Updates-card2,.Updates-card3{
+  margin-top: 92px;
+}
+
+.card2-title,.card3-title{
   font-family: Source Han Sans SC;
     font-weight: bold;
     font-size: 22px;
     color: #000000;
 }
 
-.card1-title{
-width: 688px;
-height: 92px;
-}
+// .card1-title{
+// width: 688px;
+// height: 92px;
+// }
 
 .card2-title{
 width: 688px;
@@ -365,7 +385,7 @@ height: 57px;
   display: flex;
   // justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 34px;
 }
 .data-left{
   width: 168.8px;
@@ -374,7 +394,7 @@ background: #F2F2F2;
 opacity: 0.9;
 text-align: center;
 font-family: Source Han Sans SC;
-font-weight: 400;
+font-weight: bold;
 font-size: 18px;
 color: #808080;
 line-height: 46.1px;
@@ -382,9 +402,9 @@ line-height: 46.1px;
 .data-right{
   margin-left: 38px;
   // width: 105px;
-height: 18px;
+height: 19px;
 font-family: Source Han Sans SC;
-font-weight: 400;
+font-weight: bold;
 font-size: 18px;
 color: #808080;
 line-height: 24px;
@@ -395,48 +415,29 @@ font-family: Source Han Sans SC;
 font-weight: 400;
 font-size: 18px;
 color: #808080;
-
-}
-
-.card1-content{
-  max-width: 641px;
-  height: 74px;
-   white-space: pre-line;
-}
-
-.card2-content{
-  max-width: 690px;
-  height: 74px;
-   white-space: pre-line;
-}
-
-
-.card3-content{
-  max-width: 689px;
-  height: 48px;
-   white-space: pre-line;
+line-height: 26px;
+max-width: 690px;
+  min-width: 690px;
+  height: 71px;
+  white-space: pre-line;
 }
 
 .card1-image,.card2-image,.card3-image{
-  width: 687.7px;
-    height: 330.9px;
-  margin: 28px 0;
+  width: 689px;
+    height: 330px;
+  margin: 28px 0 29px 0;
+
 // max-width: 100%;
 }
 
 .card1-image img,.card2-image img,.card3-image img{
-  width: 687.7px;
-  height: 330.9px;
-  border-radius: 20px;
+  width: 689px;
+    height: 330px;
 }
 .section-card,.section-card1{
-margin-top: 128px;
+margin-top: 131px;
 margin-left: 29px;
 margin-right: 31px;
-}
-
-.section-card1{
-  margin-top: 133px;
 }
 
 .card-title{
@@ -450,14 +451,15 @@ margin-left: 2px;
 // border: 1px solid #000;
 }
 .card-container{
-  margin-top: 36px;
+  margin-top: 35px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  border:1px solid transparent;
 }
 
 .card-container1{
-  margin-top: 39px;
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -465,71 +467,71 @@ margin-left: 2px;
 }
 
 .card1 img,.card2 img,.card3 img{
-  width: 335px;
-  height: 168px;
+  width: 339px;
+  height: 171px;
 }
 
 .cards3{
-  margin-top: 45px;
+  margin-top: 40px;
 }
 .cards1 img,.cards2 img,.cards3 img{
   width: 336px;
   height: 169px;
-  border-radius: 20px;
 }
 
 .card1 .h3{
-  width: 318px;
-height: 67px;
+  width: 263px;
+height: 71px;
 font-family: Source Han Sans SC;
 font-weight: bold;
-font-size: 18px;
+font-size: 22px;
 color: #000000;
-margin-top: 27px;
+margin-top: 23px;
+margin-bottom: 5px;
 }
 .card2 .h3{
-  width: 317px;
-height: 67px;
+  width: 340px;
+height: 75px;
 font-family: Source Han Sans SC;
 font-weight: bold;
-font-size: 18px;
+font-size: 22px;
 color: #000000;
 // line-height: 26px;
-margin-top: 26px;
+margin-top: 24px;
 }
 .card3 .h3{
-  width: 290px;
-height: 41px;
+  width: 276px;
+height: 72px;
 font-family: Source Han Sans SC;
 font-weight: bold;
-font-size: 18px;
+font-size: 22px;
 color: #000000;
 // line-height: 26px;
-margin-top: 28px;
+margin-top: 22px;
 }
 
 
 .cards1 .h3{
   width: 314px;
-height: 67px;
+height: 71px;
 font-family: Source Han Sans SC;
 font-weight: bold;
-font-size: 18px;
+font-size: 22px;
 color: #000000;
-margin-bottom: 23px;
-margin-top: 29px;
+margin-bottom: 29px;
+margin-top: 23px;
 border: 1px solid transparent;
 }
 .cards2 .h3{
-  width: 309px;
-height: 67px;
+  width: 330px;
+height: 75px;
 font-family: Source Han Sans SC;
 font-weight: bold;
-font-size: 18px;
+font-size: 22px;
 color: #000000;
-margin-bottom: 23px;
-margin-top: 27px;
-overflow: hidden;
+margin-bottom: 24px;
+margin-top: 24px;
+// overflow: hidden;
 text-overflow: ellipsis;
 display: -webkit-box;
 -webkit-line-clamp: 3; /* 大致控制在 3 行内，根据 line-height 来决定 */
@@ -537,37 +539,35 @@ display: -webkit-box;
   border: 1px solid transparent;
 }
 .cards3 .h3{
-  width: 306px;
-height: 67px;
+overflow: hidden;
+  width: 330px;
+height: 87px;
 font-family: Source Han Sans SC;
 font-weight: bold;
-font-size: 18px;
+font-size: 22px;
 color: #000000;
 margin-bottom: 24px;
-margin-top: 35px;
+margin-top: 24px;
 white-space: pre-line;
 border: 1px solid transparent;
 }
 
-
-
-
 .card-p2{
   width: 140px;
-margin-top: 23px;
+  height: 50px;
+margin-top: 29px;
 font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 18px;
 color: #808080;
-border: 1px solid transparent;
 white-space: pre-line;
 }
 
 .card3{
-  margin-top: 42px;
-  // border: 1px solid red;
+  margin-top: 38px;
 }
 .card-p1{
+  width: 339px;
 // height: 41px;
 font-family: Source Han Sans SC;
 font-weight: bold;
@@ -588,8 +588,7 @@ border: 1px solid transparent;
 }
 
 .video-container{
-  margin-top: 128px;
-  
+  margin-top: 134px;
 }
 .video-title{
 margin-left: 31px;
@@ -597,18 +596,16 @@ font-family: Alibaba PuHuiTi;
 font-weight: bold;
 font-size: 36px;
 color: #000000;
-
 }
 .video-container .hub-showcase{
   position: relative; // 使 overlay 能够相对于视频定位
-  width: 91.84%; // Adjusted for mobile, assuming full width
-  max-width: 688.8px;
+  width: 691px; // Adjusted for mobile, assuming full width
+  max-width: 691px;
   // height: 396.9px;
   margin: auto;
   // left: -20.0006px; // May need adjustment for mobile
-  margin-bottom: 133px; // Adjusted for mobile
-  margin-top: 42px;
-  
+  margin-bottom: 132px; // Adjusted for mobile
+  margin-top: 41px;
 }
 
 .video-container .hub-showcase video{
