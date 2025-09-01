@@ -86,7 +86,7 @@
       <div class="mobile-video-section">
         <div class="homeConet3_text">{{ $t('homePage.title') }}</div>
         <section class="section hub-showcase mobile-hub-showcase">
-          <video ref="videoPlayer" class="rounded-video mobile-rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+          <video ref="videoPlayer" class="rounded-video mobile-rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale" :poster="videoPoster">
             <source :src="videoSource" type="video/mp4">
             {{ $t('contactsPage.videoNotSupported') }}
           </video>
@@ -139,6 +139,7 @@ import ENvideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频
 import ZHVideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频 中英文双语字幕版.mp4';
 import playIcon from '../../assets/index/播放.png';
 import pauseIcon from '../../assets/index/暂停.png';
+import videoPoster from '../../assets/视频封面.jpg'; // 导入视频封面图片
 
 
 // Business Card 数据

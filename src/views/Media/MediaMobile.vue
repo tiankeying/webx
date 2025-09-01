@@ -89,7 +89,7 @@
       </div>
       <!-- 视频 -->
       <section class="section hub-showcase">
-        <video ref="videoPlayer" class="rounded-video " loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+        <video ref="videoPlayer" class="rounded-video " loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale" :poster="videoPoster">
           <source :src="videoSource" type="video/mp4">
           <!-- <source src="../../assets/index/0a0a0e804f804ba4e109f3fcb4cd34a8.mp4" type="video/mp4"> -->
           {{ $t('contactsPage.videoNotSupported') }}
@@ -137,6 +137,7 @@ import industryImage2 from '../../assets/index/插图2(2).png';
 import industryImage3 from '../../assets/index/插图3(2).png';
 import more from '../../assets/index/更多.png';
 import moreBlack from '../../assets/index/更多黑.png';
+import videoPoster from '../../assets/视频封面.jpg'; // 导入视频封面图片
 // 使用动态导入来避免文件名编码问题
 const ENvideo = new URL('../../assets/m-index/（压缩手机版）WebX-企宣视频英文版English.mp4', import.meta.url).href;
 const ZHVideo = new URL('../../assets/m-index/（压缩手机版）WebX-企宣视频 中英文双语字幕版.mp4', import.meta.url).href;

@@ -97,7 +97,7 @@
       <div class="business-card-btn">
          <div class="homeConet02_text" > {{ $t('homePage.title') }}</div>
         <section class="section hub-showcase">
-      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale" :poster="videoPoster">
         <source :src="videoSource" type="video/mp4">
         {{ $t('contactsPage.videoNotSupported') }}
       </video>
@@ -151,6 +151,7 @@ import pauseIcon from '../../assets/index/暂停.png';
 import more from '../../assets/index/更多.png';
 import moreBlack from '../../assets/index/更多黑.png';
 import { useI18n } from 'vue-i18n'
+import videoPoster from '../../assets/视频封面.jpg'; // 导入视频封面图片
 
 const { t } = useI18n()
 const videoPlayer = ref(null);

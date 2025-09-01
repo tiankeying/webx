@@ -139,7 +139,7 @@
     </section>
 
     <section class="section hub-showcase">
-      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale" :poster="videoPoster">
         <source :src="videoSource" type="video/mp4">
         {{ $t('contactsPage.videoNotSupported') }}
       </video>
@@ -177,6 +177,7 @@ import more from '../../assets/index/更多.png';
 import moreBlack from '../../assets/index/更多黑.png';
 import ENvideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频英文版English.mp4';
 import ZHVideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频 中英文双语字幕版.mp4';
+import videoPoster from '../../assets/视频封面.jpg'; // 导入视频封面图片
 
 const { t } = useI18n()
 const videoPlayer = ref(null);
