@@ -94,6 +94,35 @@
           </div>
         </div>
       </div>
+      <div class="business-card-btn">
+         <div class="homeConet02_text" > {{ $t('homePage.title') }}</div>
+        <section class="section hub-showcase">
+      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+        <source :src="videoSource" type="video/mp4">
+        {{ $t('contactsPage.videoNotSupported') }}
+      </video>
+
+      <div class="video-overlay" :class="{ 'playing': isPlaying }" @click="togglePlayPause">
+        <img :src="isPlaying ? playIcon : pauseIcon" alt="Play/Pause Button" class="play-pause-btn"
+          :class="{ 'clicked': isAnimating }" />
+        <!-- 可以添加一个静音按钮 -->
+        <button @click.stop="toggleMute" class="mute-btn">
+          {{ isMuted ? '🔇' : '🔊' }}
+        </button>
+      </div>
+      <!-- 视频进度条 -->
+      <div class="video-progress-container" @click="seekVideo">
+        <div class="video-progress-bar">
+          <div class="video-progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+          <div class="video-progress-thumb" :style="{ left: progressPercentage + '%' }"></div>
+        </div>
+        <div class="video-time-display">
+          <span class="current-time">{{ formatTime(currentTime) }}</span>
+          <span class="duration">{{ formatTime(duration) }}</span>
+        </div>
+      </div>
+    </section>
+      </div>
     </div>
   </div>
 
@@ -102,7 +131,7 @@
 import BusinessCard from '@/views/Common/BusinessCard.vue'
 import BusinessCardR from '@/views/Common/BusinessCardR.vue'
 import GradientRectangle from '../Common/GradientRectangle.vue'
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch, nextTick } from 'vue';
 
 
 // 导入图片
@@ -114,6 +143,87 @@ import cartIcon from '@/assets/index/购物车.png'
 import rocketIcon from '@/assets/index/火箭.png'
 import gameVideoIcon from '@/assets/index/游戏影片.png'
 import gameConsoleIcon from '@/assets/index/游戏机.png'
+
+import ENvideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频英文版English.mp4';
+import ZHVideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频 中英文双语字幕版.mp4';
+import playIcon from '../../assets/index/播放.png';
+import pauseIcon from '../../assets/index/暂停.png';
+import more from '../../assets/index/更多.png';
+import moreBlack from '../../assets/index/更多黑.png';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const videoPlayer = ref(null);
+const isPlaying = ref(false);
+const isAnimating = ref(false);
+const { locale } = useI18n()
+const isMuted = ref(true);
+
+// 进度条相关变量
+const currentTime = ref(0);
+const duration = ref(0);
+const progressPercentage = computed(() => {
+  return duration.value > 0 ? (currentTime.value / duration.value) * 100 : 0;
+});
+
+// 根据语言动态切换视频源
+const videoSource = computed(() => {
+  if (locale.value === 'en') {
+    return ENvideo; // 英文视频
+  } else {
+    return ZHVideo; // 中文视频，请替换为实际的中文视频文件名
+  }
+});
+
+const togglePlayPause = () => {
+  if (videoPlayer.value) {
+    if (isPlaying.value) {
+      videoPlayer.value.pause();
+    } else {
+      videoPlayer.value.play();
+    }
+    // 触发动画
+    isAnimating.value = true;
+    setTimeout(() => {
+      isAnimating.value = false;
+    }, 1000); // 动画持续1秒
+  }
+};
+
+
+// 切换静音状态的函数
+const toggleMute = () => {
+  if (videoPlayer.value) {
+    videoPlayer.value.muted = !videoPlayer.value.muted;
+    isMuted.value = videoPlayer.value.muted;
+  }
+};
+
+// 格式化时间显示
+const formatTime = (time) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+};
+
+// 点击进度条跳转视频
+const seekVideo = (event) => {
+  if (videoPlayer.value && duration.value > 0) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const percentage = clickX / rect.width;
+    const newTime = percentage * duration.value;
+    videoPlayer.value.currentTime = newTime;
+  }
+};
+
+// 更新视频时间
+const updateVideoTime = () => {
+  if (videoPlayer.value) {
+    currentTime.value = videoPlayer.value.currentTime;
+    duration.value = videoPlayer.value.duration || 0;
+  }
+};
 
 const openWebxGame = () => {
   window.open('https://g.webx.ai', '_blank') // 新标签页打开
@@ -137,6 +247,31 @@ const businessIcons = ref([
 const mapSectionRef = ref(null);
 const markersAnimated = ref(false);
 let mapObserver = null;
+
+// 绑定视频事件监听器的函数
+const bindVideoEvents = () => {
+  if (videoPlayer.value) {
+    videoPlayer.value.addEventListener('play', () => {
+      isPlaying.value = true;
+    });
+    videoPlayer.value.addEventListener('pause', () => {
+      isPlaying.value = false;
+    });
+    videoPlayer.value.addEventListener('timeupdate', updateVideoTime);
+    videoPlayer.value.addEventListener('loadedmetadata', updateVideoTime);
+    videoPlayer.value.addEventListener('durationchange', updateVideoTime);
+    // 初始状态检查，如果视频自动播放，则设置isPlaying为true
+    if (videoPlayer.value.autoplay) {
+      isPlaying.value = true;
+    }
+  }
+};
+
+// 监听语言变化，重新绑定视频事件
+watch(locale, async () => {
+  await nextTick(); // 等待DOM更新
+  bindVideoEvents();
+});
 
 onMounted(() => {
   const options = {
@@ -169,6 +304,9 @@ onMounted(() => {
   if (mapSectionRef.value) {
     mapObserver.observe(mapSectionRef.value);
   }
+
+  // 初始绑定视频事件
+  bindVideoEvents();
 });
 
 onUnmounted(() => {
@@ -945,7 +1083,10 @@ border: 1px solid transparent;
   max-width: 1180px; // 与 .homeConet04_box 保持一致
   min-width: 1164px;
   margin: 0 auto;
-  margin-bottom: 239px;
+  
+}
+.business-card-btn{
+margin-bottom: 239px;
 }
 
 /* Ensure the main map container (.homeConet02) has a clear background if map image is transparent */
@@ -954,5 +1095,261 @@ border: 1px solid transparent;
   // you might need to set it on .homeConetImg or .homeConet03
   // For example, if 矩形 1.png is just a blue rectangle, and 地图.png is transparent with just continents/lines:
   // .homeConetImg { background-color: #0A2540; } // Example dark blue
+}
+
+/* 视频播放器样式 */
+.section.hub-showcase {
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  margin: 100px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.rounded-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  background: #000;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 20px;
+}
+
+.video-overlay:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.play-pause-btn {
+  width: 80px;
+  height: 80px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.play-pause-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 播放时隐藏背景 */
+.video-overlay.playing .play-pause-btn {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 悬停时显示背景 */
+.video-overlay.playing:hover .play-pause-btn {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.play-pause-btn.clicked {
+  animation: clickPulse 0.3s ease;
+}
+
+@keyframes clickPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mute-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.mute-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.mute-btn:active {
+  transform: scale(0.95);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .section.hub-showcase {
+    margin: 50px 20px;
+    border-radius: 15px;
+  }
+  
+  .rounded-video {
+    border-radius: 15px;
+  }
+  
+  .video-overlay {
+    border-radius: 15px;
+  }
+  
+  .play-pause-btn {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .mute-btn {
+    bottom: 15px;
+    right: 15px;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section.hub-showcase {
+    margin: 30px 15px;
+    border-radius: 10px;
+  }
+  
+  .rounded-video {
+    border-radius: 10px;
+  }
+  
+  .video-overlay {
+    border-radius: 10px;
+  }
+  
+  .play-pause-btn {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .mute-btn {
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+
+/* 视频进度条样式 */
+.video-progress-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 15px;
+  border-radius: 0 0 20px 20px;
+}
+
+.video-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.video-progress-fill {
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+  transition: width 0.1s ease;
+}
+
+.video-progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: left 0.1s ease;
+}
+
+.video-time-display {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.current-time, .duration {
+  font-family: 'Arial', sans-serif;
+}
+
+/* 响应式进度条 */
+@media (max-width: 768px) {
+  .video-progress-container {
+    padding: 8px 12px;
+  }
+  
+  .video-progress-bar {
+    height: 4px;
+    margin-bottom: 6px;
+  }
+  
+  .video-progress-thumb {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .video-time-display {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-progress-container {
+    padding: 6px 10px;
+  }
+  
+  .video-progress-bar {
+    height: 3px;
+    margin-bottom: 5px;
+  }
+  
+  .video-progress-thumb {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .video-time-display {
+    font-size: 10px;
+  }
 }
 </style>

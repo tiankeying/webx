@@ -46,7 +46,7 @@
               {{ $t('contactsPage.dateMay282025') }}
             </div>
           </div>
-          <div class="title">{{ $t('contactsPage.webxBusinessDescription') }}</div>
+          <div class="title">{{ $t('contactsPage.add') }} | {{ $t('contactsPage.webxBusinessDescription') }}</div>
         </div>
         <div class="card1-img1"><img src="../../assets/index/配图1.png" alt="Ecosystem Image"
             @click="handleImageClick(ecosystemLinks.link1)" style="cursor: pointer;" /></div>
@@ -139,12 +139,12 @@
     </section>
 
     <section class="section hub-showcase">
-      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false">
-        <source src="../../assets/index/0a0a0e804f804ba4e109f3fcb4cd34a8.mp4" type="video/mp4">
+      <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+        <source :src="videoSource" type="video/mp4">
         {{ $t('contactsPage.videoNotSupported') }}
       </video>
 
-      <div class="video-overlay" @click="togglePlayPause">
+      <div class="video-overlay" :class="{ 'playing': isPlaying }" @click="togglePlayPause">
         <img :src="isPlaying ? playIcon : pauseIcon" alt="Play/Pause Button" class="play-pause-btn"
           :class="{ 'clicked': isAnimating }" />
         <!-- 可以添加一个静音按钮 -->
@@ -152,18 +152,32 @@
           {{ isMuted ? '🔇' : '🔊' }}
         </button>
       </div>
+      <!-- 视频进度条 -->
+      <div class="video-progress-container" @click="seekVideo">
+        <div class="video-progress-bar">
+          <div class="video-progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+          <div class="video-progress-thumb" :style="{ left: progressPercentage + '%' }"></div>
+        </div>
+        <div class="video-time-display">
+          <span class="current-time">{{ formatTime(currentTime) }}</span>
+          <span class="duration">{{ formatTime(duration) }}</span>
+        </div>
+      </div>
     </section>
 
   </div>
 </template>
 <script setup>
 
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch, nextTick,onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n'
 import playIcon from '../../assets/index/播放.png';
 import pauseIcon from '../../assets/index/暂停.png';
 import more from '../../assets/index/更多.png';
 import moreBlack from '../../assets/index/更多黑.png';
+import ENvideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频英文版English.mp4';
+import ZHVideo from '../../assets/m-index/（压缩手机版）WebX-企宣视频 中英文双语字幕版.mp4';
+
 const { t } = useI18n()
 const videoPlayer = ref(null);
 const isPlaying = ref(false);
@@ -172,6 +186,22 @@ const { locale } = useI18n()
 
 const isMuted = ref(true);
 
+// 进度条相关变量
+const currentTime = ref(0);
+const duration = ref(0);
+const progressPercentage = computed(() => {
+  return duration.value > 0 ? (currentTime.value / duration.value) * 100 : 0;
+});
+
+// 根据语言动态切换视频源
+const videoSource = computed(() => {
+  if (locale.value === 'en') {
+    return ENvideo; // 英文视频
+  } else {
+    return ZHVideo; // 中文视频，请替换为实际的中文视频文件名
+  }
+});
+
 const showTooltip = ref(false);
 
 // 切换静音状态的函数
@@ -179,6 +209,32 @@ const toggleMute = () => {
   if (videoPlayer.value) {
     videoPlayer.value.muted = !videoPlayer.value.muted;
     isMuted.value = videoPlayer.value.muted;
+  }
+};
+
+// 格式化时间显示
+const formatTime = (time) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+};
+
+// 点击进度条跳转视频
+const seekVideo = (event) => {
+  if (videoPlayer.value && duration.value > 0) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const percentage = clickX / rect.width;
+    const newTime = percentage * duration.value;
+    videoPlayer.value.currentTime = newTime;
+  }
+};
+
+// 更新视频时间
+const updateVideoTime = () => {
+  if (videoPlayer.value) {
+    currentTime.value = videoPlayer.value.currentTime;
+    duration.value = videoPlayer.value.duration || 0;
   }
 };
 
@@ -216,23 +272,23 @@ const handleImageClick = (url) => {
 
 // 定义每张图片对应的跳转链接
 const imageLinks = {
-  industry1: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email', // RWA报告链接
-  industry2: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email', // 香港稳定币相关链接
-  industry3: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email', // 质押行业概览链接
+  industry1: 'https://news.marketersmedia.com/hackquest-secures-dollar41-million-in-funding-led-by-animoca-brands-and-open-campus-to-tackle-web3s-critical-developer-shortage/89166781', // RWA报告链接
+  industry2: 'https://www.coingecko.com/research/publications/2025-q2-crypto-report', // 香港稳定币相关链接
+  industry3: 'https://metrics.w3bstream.com/news/2025-07-03/the-depin-report-2025-transforming-infrastructure-through-decentralization', // 质押行业概览链接
 };
 
 // updates的链接
 const updatesLinks = {
-  industry1: 'https://x.com/WebX_vip/status/1941084085155475469?t=menx04EkE8Z5IWFiaJu8ew&s=19',
-  industry2: 'https://x.com/WebX_vip/status/1940342532636017049?t=M7xFUsDbVEyD8wq2L-R_fg&s=19',
-  industry3: 'https://medium.com/@webx/rwa-tokenization-the-integration-of-blockchain-and-real-world-assets-cce5d125cf6f',
+  industry1: 'https://x.com/WebX_vip/status/1953045456898146799',
+  industry2: 'https://medium.com/@webx/practice-of-stablecoins-in-the-emerging-financial-landscape-438cc4672619',
+  industry3: 'https://medium.com/@webx/tips-for-using-digital-currency-for-payment-7c0e39f09a25',
 }
 
 // 添加生态系统更新部分的链接
 const ecosystemLinks = {
-  link1: 'https://medium.com/@WebXBusiness/behind-the-algorithm-how-webx-business-delivers-ai-powered-personalized-d4c1b191d5ce',
-  link2: 'https://medium.com/@WebXBusiness/why-we-prefer-value-added-consumption-6e7b8edb3486',
-  link3: 'https://medium.com/@WebXBusiness/webx-business-blending-multicultural-consumer-scenarios-in-a-globalized-strategy-133841819ba1'
+  link1: 'https://medium.com/@WebXBusiness/where-does-your-money-go-value-evaporation-and-user-silence-in-the-digital-consumption-era-1ccf0873a9c6',
+  link2: 'https://medium.com/@WebXBusiness/why-we-need-consumer-led-commerce-platforms-more-than-ever-webx-business-redefines-who-owns-the-f69c053a3824',
+  link3: 'https://medium.com/@WebXBusiness/what-kind-of-consumer-rights-do-we-truly-need-7d28bf36424e'
 };
 
 const openWebxBusiness = () => {
@@ -240,6 +296,34 @@ const openWebxBusiness = () => {
   // 或者：
   // window.location.href = 'https://b.webx.ai' // 当前页打开
 }
+const mapSectionRef = ref(null);
+const markersAnimated = ref(false);
+let mapObserver = null;
+// 绑定视频事件监听器的函数
+const bindVideoEvents = () => {
+  if (videoPlayer.value) {
+    videoPlayer.value.addEventListener('play', () => {
+      isPlaying.value = true;
+    });
+    videoPlayer.value.addEventListener('pause', () => {
+      isPlaying.value = false;
+    });
+    videoPlayer.value.addEventListener('timeupdate', updateVideoTime);
+    videoPlayer.value.addEventListener('loadedmetadata', updateVideoTime);
+    videoPlayer.value.addEventListener('durationchange', updateVideoTime);
+    // 初始状态检查，如果视频自动播放，则设置isPlaying为true
+    if (videoPlayer.value.autoplay) {
+      isPlaying.value = true;
+    }
+  }
+};
+
+// 监听语言变化，重新绑定视频事件
+watch(locale, async () => {
+  await nextTick(); // 等待DOM更新
+  bindVideoEvents();
+});
+
 
 onMounted(() => {
   if (videoPlayer.value) {
@@ -253,6 +337,46 @@ onMounted(() => {
     if (videoPlayer.value.autoplay) {
       isPlaying.value = true;
     }
+  }
+  const options = {
+    root: null,
+    threshold: 0.1,
+  };
+
+  mapObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible'); // Add is-visible to the map container itself
+        if (!markersAnimated.value) {
+          const markers = entry.target.querySelectorAll('.map-marker');
+          markers.forEach(marker => marker.classList.add('is-floating'));
+          const globalIcon = entry.target.querySelector('.global-connection-icon');
+          if (globalIcon) globalIcon.classList.add('is-floating'); // Also animate global icon
+          markersAnimated.value = true;
+        }
+      } else {
+        // Optional: remove animation when out of view to re-trigger or save resources
+        // if (markersAnimated.value) {
+        //   const markers = mapSectionRef.value.querySelectorAll('.map-marker');
+        //   markers.forEach(marker => marker.classList.remove('is-floating'));
+        //   markersAnimated.value = false;
+        // }
+      }
+    });
+  }, options);
+
+  if (mapSectionRef.value) {
+    mapObserver.observe(mapSectionRef.value);
+  }
+  // 初始绑定视频事件
+  bindVideoEvents();
+});
+onUnmounted(() => {
+  if (mapObserver && mapSectionRef.value) {
+    mapObserver.unobserve(mapSectionRef.value);
+  }
+  if (mapObserver) {
+    mapObserver.disconnect();
   }
 });
 
@@ -442,6 +566,7 @@ margin-bottom: 65px;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* 大致控制在 3 行内，根据 line-height 来决定 */
   -webkit-box-orient: vertical;
+  white-space: pre-wrap; 
 }
 
 .card2-container .h3 {
@@ -575,6 +700,22 @@ border: 1px solid transparent;
   width: 96px;
   height: 96px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 播放时隐藏背景 */
+.video-overlay.playing .play-pause-btn {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 悬停时显示背景 */
+.video-overlay.playing:hover .play-pause-btn {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .play-pause-btn.clicked {
@@ -744,7 +885,96 @@ color: #000000;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-top: 8px solid #000;
-  content: '';
+  content: ''
+}
+
+/* 视频进度条样式 */
+.video-progress-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.video-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+
+.video-progress-fill {
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+.video-progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.video-progress-container:hover .video-progress-thumb {
+  opacity: 1;
+}
+
+.video-time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .video-progress-container {
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+  }
+  
+  .video-time-display {
+    font-size: 11px;
+  }
+  
+  .video-progress-thumb {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-progress-container {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+  
+  .video-time-display {
+    font-size: 10px;
+  }
+  
+  .video-progress-bar {
+    height: 3px;
+  }
+  
+  .video-progress-thumb {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 </style>

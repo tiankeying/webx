@@ -54,6 +54,8 @@ console.log('isMobile:', isMobile.value);
 
 // 路由映射函数
 const getDesktopPath = (mobilePath) => {
+  console.log('mobilePath:', mobilePath);
+  
   const pathMap = {
     '/mobile': '/',
     '/Ecosystem/mobile': '/Ecosystem',
@@ -64,6 +66,7 @@ const getDesktopPath = (mobilePath) => {
 };
 
 const getMobilePath = (desktopPath) => {
+  console.log('desktopPath:', desktopPath);
   const pathMap = {
     '/': '/mobile',
     '/Ecosystem': '/Ecosystem/mobile',
@@ -97,9 +100,12 @@ const updateComponents = () => {
         currentComponent.value = null;
     }
   } else {
+    console.log(1111, path);
+
     // 桌面端组件映射
     switch (path) {
       case '/':
+      case '/mobile':
         currentComponent.value = defineAsyncComponent(() => import('./views/Home/HomePage.vue'));
         break;
       case '/Ecosystem':
@@ -128,8 +134,25 @@ watch(isMobile, (newValue, oldValue) => {
     timestamp: new Date().toLocaleString()
   });
 
-  // 立即更新组件
-  updateComponents();
+  // 根据新的移动端状态转换路径
+  const currentPath = route.path;
+  let targetPath;
+  
+  if (newValue) {
+    // 切换到移动端，转换桌面端路径为移动端路径
+    targetPath = getMobilePath(currentPath);
+  } else {
+    // 切换到桌面端，转换移动端路径为桌面端路径
+    targetPath = getDesktopPath(currentPath);
+  }
+  
+  // 如果目标路径与当前路径不同，则进行路由跳转
+  if (targetPath !== currentPath) {
+    router.push(targetPath);
+  } else {
+    // 如果路径相同，只更新组件
+    updateComponents();
+  }
 }, { immediate: true });
 
 const getComponent = () => {

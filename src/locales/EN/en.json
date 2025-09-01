@@ -1,16 +1,16 @@
 {
   "message": {
-      "hello": "Hello world",
-      "welcome": "Welcome to our app",
-      "buttons": {
-          "submit": "Submit",
-          "cancel": "Cancel"
-      },
-      "popup": {
-          "title": "Kind tips",
-          "content": "We regret to inform you that our services are not available for access in your region. We apologize for any inconvenience this may cause.",
-          "acknowledge": "I Acknowledge"
-      }
+    "hello": "Hello world",
+    "welcome": "Welcome to our app",
+    "buttons": {
+      "submit": "Submit",
+      "cancel": "Cancel"
+    },
+    "popup": {
+      "title": "Kind tips",
+      "content": "We regret to inform you that our services are not available for access in your region. We apologize for any inconvenience this may cause.",
+      "acknowledge": "I Acknowledge"
+    }
   },
   "navbar": {
     "home": "Home",
@@ -24,41 +24,42 @@
   },
   "contactsPage": {
     "webxEcosystemUpdates": "WebX Ecosystem Updates",
-    "coreOfCVAS": "Behind the Algorithm: How WebX Business Delivers \nAI-Powered Personalized",
-    "webxBusinessDescription": "As the traffic dividend of traditional e-commerce gradually peaks, personalized recommendations and intelligent services have become the core competitiveness of new consumption platforms.",
-    "howCompaniesLeverageCVAS": "Why We Prefer “Value-Added Consumption”",
-    "cvasCommercialSuccess": "This article explores, from psychological and sociological perspectives, why we are increasingly inclined toward value-added consumption, and how it's reshaping both our consumer mindset and lifestyle.",
-    "trillionDollarSurge": "WebX Business: Blending Multicultural Consumer Scenarios in a Globalized Strategy",
-    "digitalEconomyEra": "WebX Business will deepen its global ecosystem, addressing cultural differences and payment preferences while providing secure, transparent, and equitable value-added consumption experiences.",
+    "coreOfCVAS": "Where Does Your Money Go? — “Value Evaporation” and User Silence in the Digital Consumption Era",
+    "add": "Introduction",
+    "webxBusinessDescription": "The Invisible Transaction: You’re Paying More Than Money",
+    "howCompaniesLeverageCVAS": "Why We Need Consumer-Led Commerce Platforms More Than Ever",
+    "cvasCommercialSuccess": "WebX Business Redefines Who Owns the Value of Consumption.",
+    "trillionDollarSurge": "What Kind of Consumer Rights Do We Truly Need?",
+    "digitalEconomyEra": "From today onward, let’s stop being mere traffic, and start becoming owners of value.",
     "webxUpdates": "WebX Updates",
-    "consumerCentricEconomy": "Not Every Era Offers a Chance to Redefine How Value Flows",
-    "revolutionizingDigitalPayments": "From Assets to Commerce, From Tech to Value, We're Connecting a Whole New World",
-    "buildingRWA": "RWA Tokenization: The Integration of Blockchain and Real-World Assets",
+    "consumerCentricEconomy": "From Cities to the World: WebX Global City Node Recruitment \nNow Open",
+    "revolutionizingDigitalPayments": "Practice of Stablecoins in the Emerging Financial Landscape",
+    "buildingRWA": "Tips for Using Digital Currency for Payment",
     "industryUpdates": "Industry Updates",
-    "hongKongStablecoin": "Stock Tokenization as Seen in Chain Data: How xStocks Differs from Robinhood?",
-    "stakingSectorOverview": "Maple Finance: Chained Asset Management in the Age of Institutional Capital",
-    "rwaReport": "EthCC Cannes Special Report: 10 Industry Trends Revealed at the Taiko Based Rollup Summit",
+    "hongKongStablecoin": "HackQuest Secures $4.1 Million in Funding Led by Animoca Brands and Open Campus to Tackle Web3’s Critical Developer Shortage",
+    "stakingSectorOverview": "2025 Q2 Crypto Industry Report",
+    "rwaReport": "The DePIN Report 2025",
     "hubShowcase": "Hub Showcase",
     "baseShowroom": "Base Showroom / Video",
     "learnMore": "Learn More",
-    "dateMay302025": "July 07, 2025",
+    "dateMay302025": "Aug 9, 2025",
     "altEcosystemImage1": "Ecosystem Image 1",
-    "dateMay282025": "Jun 24, 2025",
+    "dateMay282025": "Aug 4, 2025",
     "altEcosystemImage2": "Ecosystem Image 2",
-    "dateJun182025": "Jun 18, 2025",
-    "dateMay2225": "By WebX,\nJul 4, 2025",
+    "dateJun182025": "Jul 30, 2025",
+    "dateMay2225": "By WebX,\nAug 6, 2025",
     "altEcosystemImage3": "Ecosystem Image 3",
     "altWebXUpdate1": "WebX Update 1",
     "altWebXUpdate2": "WebX Update 2",
-    "dateMay102025": "By WebX,\nJul 2, 2025",
+    "dateMay102025": "By WebX,\nAug 4, 2025",
     "altWebXUpdate3": "WebX Update 3",
-    "dateMay052025": "By WebX,\nJun 24, 2025",
+    "dateMay052025": "By WebX,\nJul 30, 2025",
     "altIndustry1": "Industry Update 1",
-    "bySummerZhenMay212025": "By Amanda,\nJul 3, 2025",
+    "bySummerZhenMay212025": "By The Block Research,\nJuly 3, 2025",
     "altIndustry2": "Industry Update 2",
-    "byBrandonKaeMarch242025": "By Wu said,\nJul 4, 2025",
+    "byBrandonKaeMarch242025": "By PRESS RELEASE Plentisoft,\nAug 8, 2025",
     "altIndustry3": "Industry Update 3",
-    "coinGeckoMarch202024": "By Ryan Yoon and Elsa,\nJul 4, 2025",
+    "coinGeckoMarch202024": "By CoinGecko,\nJuly 17,2025",
     "videoNotSupported": "Your browser does not support video playback.",
     "altPlayPauseButton": "Play/Pause Button",
     "altWebXBtn": "WebX Button",
@@ -79,6 +80,7 @@
     "webxAsset": "Risen Asset"
   },
   "homePage": {
+    "title": "Our Story",
     "welcome": "Welcome",
     "ToWebx": " to WebX",
     "smartEngine": "Smart Engine for New Economy",
@@ -98,7 +100,7 @@
     "europe": "EUROPE",
     "webx": "WebX ",
     "Ecosystem": "Ecosystem",
-    "weAreWebx":"We Are WebX",
+    "weAreWebx": "We Are WebX",
     "introDesc1": "As the global economic paradigm undergoes",
     "introDesc2": "profound transformation, \n",
     "introDesc3": "WebX is positioned to lead this change."
@@ -113,7 +115,6 @@
     "message": "Message",
     "submitTip": "By submitting this form, you agree to the WebX Privacy Policy & Term of Use.",
     "submit": "Submit"
-
   },
   "marketPage": {
     "helloEcosystem": "Hello Ecosystem Page"
@@ -122,10 +123,10 @@
     "helloEcosystem": "Hello Ecosystem Page"
   },
   "customSelect": {
-        "placeholder": "Please select a reason",
-        "generalInquiry": "General Inquiry",
-        "support": "Support",
-        "partnership": "Partnership",
-        "other": "Other"
-    }
+    "placeholder": "Please select a reason",
+    "generalInquiry": "General Inquiry",
+    "support": "Support",
+    "partnership": "Partnership",
+    "other": "Other"
+  }
 }

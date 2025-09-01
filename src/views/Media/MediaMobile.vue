@@ -89,17 +89,29 @@
       </div>
       <!-- 视频 -->
       <section class="section hub-showcase">
-        <video ref="videoPlayer" class="rounded-video" loop :muted="isMuted" playsinline @ended="isPlaying = true">
-          <source src="../../assets/index/0a0a0e804f804ba4e109f3fcb4cd34a8.mp4" type="video/mp4">
+        <video ref="videoPlayer" class="rounded-video " loop :muted="isMuted" playsinline @ended="isPlaying = false" :key="locale">
+          <source :src="videoSource" type="video/mp4">
+          <!-- <source src="../../assets/index/0a0a0e804f804ba4e109f3fcb4cd34a8.mp4" type="video/mp4"> -->
           {{ $t('contactsPage.videoNotSupported') }}
         </video>
 
-        <div class="video-overlay" @click="togglePlayPause">
-          <img :src="isPlaying ? playIcon : pauseIcon" alt="Play/Pause Button" class="play-pause-btn"
+        <div class="video-overlay mobile-video-overlay" :class="{ 'playing': isPlaying }" @click="togglePlayPause">
+          <img :src="isPlaying ? playIcon : pauseIcon" alt="Play/Pause Button" class="play-pause-btn mobile-play-pause-btn"
             :class="{ 'clicked': isAnimating }" />
           <button @click.stop="toggleMute" class="mute-btn">
             {{ isMuted ? '🔇' : '🔊' }}
           </button>
+        </div>
+        <!-- 视频进度条 -->
+        <div class="video-progress-container" @click="seekVideo">
+          <div class="video-progress-bar">
+            <div class="video-progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+            <div class="video-progress-thumb" :style="{ left: progressPercentage + '%' }"></div>
+          </div>
+          <div class="video-time-display">
+            <span class="current-time">{{ formatTime(currentTime) }}</span>
+            <span class="duration">{{ formatTime(duration) }}</span>
+          </div>
         </div>
       </section>
     </div>
@@ -110,7 +122,7 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n'
 import playIcon from '../../assets/index/播放.png';
 import pauseIcon from '../../assets/index/暂停.png';
@@ -125,6 +137,10 @@ import industryImage2 from '../../assets/index/插图2(2).png';
 import industryImage3 from '../../assets/index/插图3(2).png';
 import more from '../../assets/index/更多.png';
 import moreBlack from '../../assets/index/更多黑.png';
+// 使用动态导入来避免文件名编码问题
+const ENvideo = new URL('../../assets/m-index/（压缩手机版）WebX-企宣视频英文版English.mp4', import.meta.url).href;
+const ZHVideo = new URL('../../assets/m-index/（压缩手机版）WebX-企宣视频 中英文双语字幕版.mp4', import.meta.url).href;
+
 
 const { t } = useI18n()
 const videoPlayer = ref(null);
@@ -136,6 +152,22 @@ const showTooltip = ref(false);
 
 const isMuted = ref(true);
 
+// 进度条相关变量
+const currentTime = ref(0);
+const duration = ref(0);
+const progressPercentage = computed(() => {
+  return duration.value > 0 ? (currentTime.value / duration.value) * 100 : 0;
+});
+
+// 根据语言动态切换视频源
+const videoSource = computed(() => {
+  if (locale.value === 'en') {
+    return ENvideo; // 英文视频
+  } else {
+    return ZHVideo; // 中文视频，请替换为实际的中文视频文件名
+  }
+});
+
 // 切换静音状态的函数
 const toggleMute = () => {
   if (videoPlayer.value) {
@@ -143,6 +175,34 @@ const toggleMute = () => {
     isMuted.value = videoPlayer.value.muted;
   }
 };
+
+// 格式化时间显示
+const formatTime = (time) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+};
+
+// 点击进度条跳转视频
+const seekVideo = (event) => {
+  if (videoPlayer.value && duration.value > 0) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const percentage = clickX / rect.width;
+    const newTime = percentage * duration.value;
+    videoPlayer.value.currentTime = newTime;
+  }
+};
+
+// 更新视频时间
+const updateVideoTime = () => {
+  if (videoPlayer.value) {
+    currentTime.value = videoPlayer.value.currentTime;
+    duration.value = videoPlayer.value.duration || 0;
+  }
+};
+
+
 
 const togglePlayPause = () => {
   if (videoPlayer.value) {
@@ -170,21 +230,21 @@ const updatesCards = [
     date: 'contactsPage.dateMay302025',
     image: cardImage3,
     content: 'contactsPage.digitalEconomyEra',
-    link: 'https://medium.com/@WebXBusiness/webx-business-blending-multicultural-consumer-scenarios-in-a-globalized-strategy-133841819ba1',
+    link: 'https://medium.com/@WebXBusiness/what-kind-of-consumer-rights-do-we-truly-need-7d28bf36424e',
   },
   {
     title: 'contactsPage.coreOfCVAS',
     date: 'contactsPage.dateMay282025',
     image: cardImage1,
     content: 'contactsPage.webxBusinessDescription',
-    link: 'https://medium.com/@WebXBusiness/behind-the-algorithm-how-webx-business-delivers-ai-powered-personalized-d4c1b191d5ce',
+    link: 'https://medium.com/@WebXBusiness/where-does-your-money-go-value-evaporation-and-user-silence-in-the-digital-consumption-era-1ccf0873a9c6',
   },
   {
     title: 'contactsPage.howCompaniesLeverageCVAS',
     date: 'contactsPage.dateJun182025',
     image: cardImage2,
     content: 'contactsPage.cvasCommercialSuccess',
-    link: 'https://medium.com/@WebXBusiness/why-we-prefer-value-added-consumption-6e7b8edb3486',
+    link: 'https://medium.com/@WebXBusiness/why-we-need-consumer-led-commerce-platforms-more-than-ever-webx-business-redefines-who-owns-the-f69c053a3824',
   }
 ];
 
@@ -193,19 +253,19 @@ const webxUpdatesCards = [
     title: 'contactsPage.consumerCentricEconomy',
     date: 'contactsPage.dateMay2225',
     image: updatesImage1,
-    link:'https://x.com/WebX_vip/status/1941084085155475469?t=menx04EkE8Z5IWFiaJu8ew&s=19',
+    link:'https://x.com/WebX_vip/status/1953045456898146799',
   },
   {
     title: 'contactsPage.revolutionizingDigitalPayments',
     date: 'contactsPage.dateMay102025',
     image: updatesImage2,
-    link:'https://x.com/WebX_vip/status/1940342532636017049?t=M7xFUsDbVEyD8wq2L-R_fg&s=19',
+    link:'https://medium.com/@webx/practice-of-stablecoins-in-the-emerging-financial-landscape-438cc4672619',
   },
   {
     title: 'contactsPage.buildingRWA',
     date: 'contactsPage.dateMay052025',
     image: updatesImage3,
-    link:'https://medium.com/@webx/rwa-tokenization-the-integration-of-blockchain-and-real-world-assets-cce5d125cf6f',
+    link:'https://medium.com/@webx/tips-for-using-digital-currency-for-payment-7c0e39f09a25',
   }
 ];
 
@@ -214,20 +274,20 @@ const industryUpdatesCards = [
     title: 'contactsPage.hongKongStablecoin',
     author: 'contactsPage.byBrandonKaeMarch242025',
     image: industryImage1,
-    link: 'https://www.wublock123.com/article/47/45023?utm_source=substack&utm_medium=email'
+    link: 'https://news.marketersmedia.com/hackquest-secures-dollar41-million-in-funding-led-by-animoca-brands-and-open-campus-to-tackle-web3s-critical-developer-shortage/89166781'
   },
   {
     title: 'contactsPage.stakingSectorOverview',
     author: 'contactsPage.coinGeckoMarch202024',
     image: industryImage2,
-    link: 'https://reports.tiger-research.com/p/maple-finance-onchain-asset-management-chn?utm_source=substack&utm_medium=email'
+    link: 'https://www.coingecko.com/research/publications/2025-q2-crypto-report'
     
   },
   {
     title: 'contactsPage.rwaReport',
     author: 'contactsPage.bySummerZhenMay212025',
     image: industryImage3,
-     link: 'https://www.techflowpost.com/article/detail_26772.html?utm_source=substack&utm_medium=email'
+     link: 'https://metrics.w3bstream.com/news/2025-07-03/the-depin-report-2025-transforming-infrastructure-through-decentralization'
     
   }
 ];
@@ -239,24 +299,78 @@ const handleImageClick = (url) => {
   }
 };
 
-onMounted(() => {
+// 事件处理函数
+const handlePlay = () => {
+  isPlaying.value = true;
+};
+
+const handlePause = () => {
+  isPlaying.value = false;
+};
+
+// 绑定视频事件监听器的函数
+const bindVideoEvents = () => {
   if (videoPlayer.value) {
-    videoPlayer.value.addEventListener('play', () => {
-      isPlaying.value = true;
-    });
-    videoPlayer.value.addEventListener('pause', () => {
-      isPlaying.value = false;
-    });
+    // 移除之前的事件监听器以避免重复绑定
+    videoPlayer.value.removeEventListener('play', handlePlay);
+    videoPlayer.value.removeEventListener('pause', handlePause);
+    videoPlayer.value.removeEventListener('timeupdate', updateVideoTime);
+    videoPlayer.value.removeEventListener('loadedmetadata', updateVideoTime);
+    videoPlayer.value.removeEventListener('durationchange', updateVideoTime);
+    
+    // 重新绑定事件监听器
+    videoPlayer.value.addEventListener('play', handlePlay);
+    videoPlayer.value.addEventListener('pause', handlePause);
+    videoPlayer.value.addEventListener('timeupdate', updateVideoTime);
+    videoPlayer.value.addEventListener('loadedmetadata', updateVideoTime);
+    videoPlayer.value.addEventListener('durationchange', updateVideoTime);
+    
     // 初始状态检查，如果视频自动播放，则设置isPlaying为true
     if (videoPlayer.value.autoplay) {
       isPlaying.value = true;
-    } else {
-      // If not autoplaying, ensure video is paused initially
-      videoPlayer.value.pause();
-      isPlaying.value = false;
     }
-    // Set initial muted state based on video player's actual muted state
-    isMuted.value = videoPlayer.value.muted;
+  }
+};
+
+// 监听语言变化，重新绑定视频事件
+watch(locale, async () => {
+  await nextTick(); // 等待DOM更新
+  bindVideoEvents();
+});
+
+
+onMounted(async () => {
+    await nextTick();
+    
+    // 等待视频元素完全加载
+    setTimeout(() => {
+      if (videoPlayer.value) {
+        bindVideoEvents();
+        
+        // 初始状态检查，如果视频自动播放，则设置isPlaying为true
+        if (videoPlayer.value.autoplay) {
+          isPlaying.value = true;
+        } else {
+          videoPlayer.value.pause();
+          isPlaying.value = false;
+        }
+        
+        // 设置初始静音状态
+        isMuted.value = videoPlayer.value.muted;
+        
+        // 手动触发一次时间更新
+        updateVideoTime();
+      }
+    }, 100);
+  });
+
+onUnmounted(() => {
+  if (videoPlayer.value) {
+    videoPlayer.value.removeEventListener('play', handlePlay);
+    videoPlayer.value.removeEventListener('pause', handlePause);
+    videoPlayer.value.removeEventListener('timeupdate', updateVideoTime);
+    videoPlayer.value.removeEventListener('loadedmetadata', updateVideoTime);
+    videoPlayer.value.removeEventListener('durationchange', updateVideoTime);
   }
 });
 
@@ -344,15 +458,15 @@ line-height: 29px;
 }
 
 .Updates-card1 .card1-title{
-height: 57px;
+// height: 57px;
 }
 
 .Updates-card2 .card1-title{
-height: 52px;
+// height: 52px;
 }
 
 .Updates-card3 .card1-title{
-height: 24px;
+// height: 24px;
 }
 
 .Updates-card2,.Updates-card3{
@@ -418,8 +532,9 @@ color: #808080;
 line-height: 26px;
 max-width: 690px;
   min-width: 690px;
-  height: 71px;
+  // height: 71px;
   white-space: pre-line;
+  border:1px solid transparent;
 }
 
 .card1-image,.card2-image,.card3-image{
@@ -435,7 +550,7 @@ max-width: 690px;
     height: 330px;
 }
 .section-card,.section-card1{
-margin-top: 131px;
+margin-top: 128px;
 margin-left: 29px;
 margin-right: 31px;
 }
@@ -464,6 +579,7 @@ margin-left: 2px;
   flex-wrap: wrap;
   justify-content: space-between;
   border: 1px solid transparent;
+  
 }
 
 .card1 img,.card2 img,.card3 img{
@@ -472,7 +588,7 @@ margin-left: 2px;
 }
 
 .cards3{
-  margin-top: 40px;
+  margin-top: 38px;
 }
 .cards1 img,.cards2 img,.cards3 img{
   width: 336px;
@@ -481,13 +597,18 @@ margin-left: 2px;
 
 .card1 .h3{
   width: 263px;
-height: 71px;
+height: 76px;
 font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 22px;
 color: #000000;
 margin-top: 23px;
 margin-bottom: 5px;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
 }
 .card2 .h3{
   width: 340px;
@@ -498,22 +619,32 @@ font-size: 22px;
 color: #000000;
 // line-height: 26px;
 margin-top: 24px;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
 }
 .card3 .h3{
   width: 276px;
-height: 72px;
+// height: 72px;
 font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 22px;
 color: #000000;
 // line-height: 26px;
 margin-top: 22px;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
 }
 
 
 .cards1 .h3{
-  width: 314px;
-height: 71px;
+  width: 273px;
+height: 79px;
 font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 22px;
@@ -521,6 +652,11 @@ color: #000000;
 margin-bottom: 29px;
 margin-top: 23px;
 border: 1px solid transparent;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
 }
 .cards2 .h3{
   width: 330px;
@@ -529,7 +665,7 @@ font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 22px;
 color: #000000;
-margin-bottom: 24px;
+margin-bottom: 29px;
 margin-top: 24px;
 // overflow: hidden;
 text-overflow: ellipsis;
@@ -541,21 +677,24 @@ display: -webkit-box;
 .cards3 .h3{
 overflow: hidden;
   width: 330px;
-height: 87px;
+// height: 40px;
 font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 22px;
 color: #000000;
 margin-bottom: 24px;
 margin-top: 24px;
-white-space: pre-line;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
 border: 1px solid transparent;
 }
 
 .card-p2{
   width: 140px;
   height: 50px;
-margin-top: 29px;
+margin-top: 24px;
 font-family: Source Han Sans SC;
 font-weight: bold;
 font-size: 18px;
@@ -625,20 +764,45 @@ color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  opacity: 1; /* 默认隐藏 */
-  transition: opacity 0.3s ease; /* 添加淡入淡出过渡效果 */
+  transition: background 0.3s ease; /* 添加淡入淡出过渡效果 */
 }
 
 /* 当鼠标悬停在hub-showcase区域时显示播放控制 */
 .video-container .hub-showcase:hover .video-overlay {
-  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .video-container .play-pause-btn {
-  width: 60px; // Adjusted for mobile
-  height: 60px; // Adjusted for mobile
-  transition: transform 0.3s ease, opacity 0.3s ease;
+ width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  padding: 2px;
+}
+
+/* 当视频播放时，隐藏播放按钮 */
+.video-container .video-overlay.playing .play-pause-btn {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 悬停时显示按钮 */
+.video-container .video-overlay.playing:hover .play-pause-btn {
+  opacity: 1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-container .play-pause-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.video-container .play-pause-btn.clicked {
+  animation: pulse 1s ease-out;
 }
 
 .video-container .play-pause-btn.clicked {
@@ -657,6 +821,18 @@ color: #000000;
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -686,9 +862,104 @@ color: #000000;
 }
 
 .video-container .rounded-video {
-  border-radius: 12px; // Adjusted for mobile
-  overflow: hidden;
-  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  border-radius: 15px;
   object-fit: cover;
+  display: block;
+}
+
+/* 视频进度条样式 */
+.video-progress-container {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.video-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+
+.video-progress-fill {
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+.video-progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.video-progress-container:hover .video-progress-thumb {
+  opacity: 1;
+}
+
+.video-time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .video-progress-container {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+  
+  .video-time-display {
+    font-size: 9px;
+  }
+  
+  .video-progress-bar {
+    height: 2px;
+  }
+  
+  .video-progress-thumb {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .video-progress-container {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+  }
+  
+  .video-time-display {
+    font-size: 8px;
+  }
+  
+  .video-progress-bar {
+    height: 2px;
+  }
+  
+  .video-progress-thumb {
+    width: 6px;
+    height: 6px;
+  }
 }
 </style>
